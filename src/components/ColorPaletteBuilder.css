@@ -6,36 +6,66 @@
 }
 
 .header {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 30px;
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.header-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header-center {
+  flex: 1;
+  text-align: center;
+}
+
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .header h1 {
   color: #333;
-  margin-bottom: 20px;
-  font-size: 2.5rem;
-  font-weight: 300;
+  margin: 0 0 8px 0;
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tagline {
+  color: #666;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.8;
 }
 
 .palette-name-section {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 8px;
 }
 
 .palette-name-section label {
   font-weight: 500;
   color: #555;
+  font-size: 14px;
+  white-space: nowrap;
 }
 
 .palette-name-input {
   padding: 8px 12px;
   border: 2px solid #ddd;
   border-radius: 6px;
-  font-size: 16px;
-  min-width: 250px;
+  font-size: 14px;
+  min-width: 200px;
   transition: border-color 0.2s;
 }
 
@@ -230,6 +260,53 @@
 }
 
 @media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    padding: 15px 0;
+  }
+
+  .header-left,
+  .header-center,
+  .header-right {
+    flex: none;
+  }
+
+  .header-left {
+    order: 2;
+    justify-content: center;
+  }
+
+  .header-center {
+    order: 1;
+  }
+
+  .header-right {
+    order: 3;
+    justify-content: center;
+  }
+
+  .header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+  }
+
+  .tagline {
+    font-size: 0.9rem;
+  }
+
+  .palette-name-section {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .palette-name-input {
+    min-width: auto;
+    width: 100%;
+    max-width: 280px;
+  }
+
   .controls {
     flex-direction: column;
     align-items: stretch;
@@ -245,20 +322,5 @@
 
   .palette-grid {
     grid-template-columns: 1fr;
-  }
-
-  .header h1 {
-    font-size: 2rem;
-  }
-
-  .palette-name-section {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .palette-name-input {
-    min-width: auto;
-    width: 100%;
-    max-width: 300px;
   }
 }

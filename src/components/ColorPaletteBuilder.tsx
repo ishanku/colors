@@ -67,17 +67,25 @@ const ColorPaletteBuilder: React.FC = () => {
   return (
     <div className="color-palette-builder">
       <header className="header">
-        <h1>Color Palette Builder</h1>
-        <div className="palette-name-section">
-          <label htmlFor="palette-name">Palette Name:</label>
-          <input
-            id="palette-name"
-            type="text"
-            value={paletteName}
-            onChange={(e) => setPaletteName(e.target.value)}
-            className="palette-name-input"
-            placeholder="Enter palette name"
-          />
+        <div className="header-left">
+          <div className="palette-name-section">
+            <label htmlFor="palette-name">Palette Name:</label>
+            <input
+              id="palette-name"
+              type="text"
+              value={paletteName}
+              onChange={(e) => setPaletteName(e.target.value)}
+              className="palette-name-input"
+              placeholder="Enter palette name"
+            />
+          </div>
+        </div>
+        <div className="header-center">
+          <h1>Color Palette Builder</h1>
+          <p className="tagline">Create, customize, and export beautiful color palettes</p>
+        </div>
+        <div className="header-right">
+          {/* Future: Add user actions or settings */}
         </div>
       </header>
 

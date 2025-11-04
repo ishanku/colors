@@ -133,8 +133,8 @@
 }
 
 .color-display-large {
-  width: 80px;
-  height: 120px;
+  width: 100px;
+  height: 160px;
   border-radius: 12px;
   border: 2px solid #e9ecef;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -470,8 +470,8 @@
   }
 
   .color-display-large {
-    width: 60px;
-    height: 80px;
+    width: 80px;
+    height: 120px;
   }
 
   .preset-grid {
