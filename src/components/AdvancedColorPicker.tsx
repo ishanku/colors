@@ -121,22 +121,40 @@ const AdvancedColorPicker: React.FC<AdvancedColorPickerProps> = ({
         <div className="picker-content">
           {activeTab === 'wheel' && (
             <div className="wheel-tab">
-              <div className="wheel-container">
-                <ColorWheel
-                  color={currentColor}
-                  size={250}
-                  onChange={handleWheelChange}
-                />
-              </div>
-              <div className="brightness-container">
-                <label>Brightness</label>
-                <BrightnessSlider
-                  hsv={hsv}
-                  onChange={handleBrightnessChange}
-                  width={250}
-                  height={20}
-                />
-                <span>{Math.round(hsv.v)}%</span>
+              <div className="wheel-main-area">
+                <div className="wheel-left">
+                  <div className="color-preview-large">
+                    <div
+                      className="color-display-large"
+                      style={{ backgroundColor: currentColor }}
+                    />
+                    <div className="color-info-detailed">
+                      <div className="color-value-large">{currentColor}</div>
+                      <div className="color-hsv-large">
+                        H: {Math.round(hsv.h)}° S: {Math.round(hsv.s)}% V: {Math.round(hsv.v)}%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="wheel-center">
+                  <ColorWheel
+                    color={currentColor}
+                    size={220}
+                    onChange={handleWheelChange}
+                  />
+                </div>
+                <div className="wheel-right">
+                  <div className="brightness-slider-vertical">
+                    <BrightnessSlider
+                      hsv={hsv}
+                      onChange={handleBrightnessChange}
+                      width={30}
+                      height={200}
+                      vertical={true}
+                    />
+                    <span className="brightness-label">{Math.round(hsv.v)}%</span>
+                  </div>
+                </div>
               </div>
             </div>
           )}

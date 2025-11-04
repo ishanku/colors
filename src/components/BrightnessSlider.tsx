@@ -6,13 +6,15 @@ interface BrightnessSliderProps {
   onChange: (value: number) => void;
   width?: number;
   height?: number;
+  vertical?: boolean;
 }
 
 const BrightnessSlider: React.FC<BrightnessSliderProps> = ({
   hsv,
   onChange,
   width = 200,
-  height = 20
+  height = 20,
+  vertical = false
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -25,7 +27,9 @@ const BrightnessSlider: React.FC<BrightnessSliderProps> = ({
     if (!ctx) return;
 
     // Create gradient from black to full brightness
-    const gradient = ctx.createLinearGradient(0, 0, width, 0);
+    const gradient = vertical
+      ? ctx.createLinearGradient(0, height, 0, 0)  // Top to bottom (bright to dark)
+      : ctx.createLinearGradient(0, 0, width, 0);   // Left to right
 
     for (let i = 0; i <= 10; i++) {
       const value = (i / 10) * 100;
@@ -37,20 +41,37 @@ const BrightnessSlider: React.FC<BrightnessSliderProps> = ({
     ctx.fillRect(0, 0, width, height);
 
     // Draw current value indicator
-    const position = (hsv.v / 100) * width;
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(position, 0);
-    ctx.lineTo(position, height);
-    ctx.stroke();
+    if (vertical) {
+      const position = height - (hsv.v / 100) * height; // Invert for vertical
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(0, position);
+      ctx.lineTo(width, position);
+      ctx.stroke();
 
-    ctx.strokeStyle = '#000000';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(position, 0);
-    ctx.lineTo(position, height);
-    ctx.stroke();
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, position);
+      ctx.lineTo(width, position);
+      ctx.stroke();
+    } else {
+      const position = (hsv.v / 100) * width;
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(position, 0);
+      ctx.lineTo(position, height);
+      ctx.stroke();
+
+      ctx.strokeStyle = '#000000';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(position, 0);
+      ctx.lineTo(position, height);
+      ctx.stroke();
+    }
   };
 
   useEffect(() => {
@@ -69,10 +90,16 @@ const BrightnessSlider: React.FC<BrightnessSliderProps> = ({
     if (!canvas) return;
 
     const rect = canvas.getBoundingClientRect();
-    const x = Math.max(0, Math.min(width, event.clientX - rect.left));
-    const value = (x / width) * 100;
 
-    onChange(value);
+    if (vertical) {
+      const y = Math.max(0, Math.min(height, event.clientY - rect.top));
+      const value = ((height - y) / height) * 100; // Invert for vertical
+      onChange(value);
+    } else {
+      const x = Math.max(0, Math.min(width, event.clientX - rect.left));
+      const value = (x / width) * 100;
+      onChange(value);
+    }
   };
 
   useEffect(() => {

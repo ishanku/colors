@@ -16,6 +16,7 @@ const ColorPaletteBuilder: React.FC = () => {
   const [paletteName, setPaletteName] = useState('My Color Palette');
   const [newColorHex, setNewColorHex] = useState('#000000');
   const [isAdvancedPickerOpen, setIsAdvancedPickerOpen] = useState(false);
+  const [cardSize, setCardSize] = useState<'small' | 'medium' | 'large'>('medium');
 
   const addColor = useCallback(() => {
     if (isValidHex(newColorHex)) {
@@ -108,20 +109,49 @@ const ColorPaletteBuilder: React.FC = () => {
         </div>
 
         <div className="palette-controls">
-          <button onClick={clearPalette} className="clear-btn">
-            Clear All
-          </button>
-          <span className="color-count">
-            {palette.length} color{palette.length !== 1 ? 's' : ''}
-          </span>
+          <div className="left-controls">
+            <button onClick={clearPalette} className="clear-btn">
+              Clear All
+            </button>
+            <span className="color-count">
+              {palette.length} color{palette.length !== 1 ? 's' : ''}
+            </span>
+          </div>
+          <div className="size-controls">
+            <label className="size-label">Card Size:</label>
+            <div className="size-toggle">
+              <button
+                className={`size-btn ${cardSize === 'small' ? 'active' : ''}`}
+                onClick={() => setCardSize('small')}
+                title="Small cards"
+              >
+                S
+              </button>
+              <button
+                className={`size-btn ${cardSize === 'medium' ? 'active' : ''}`}
+                onClick={() => setCardSize('medium')}
+                title="Medium cards"
+              >
+                M
+              </button>
+              <button
+                className={`size-btn ${cardSize === 'large' ? 'active' : ''}`}
+                onClick={() => setCardSize('large')}
+                title="Large cards"
+              >
+                L
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="palette-grid">
+      <div className={`palette-grid size-${cardSize}`}>
         {palette.map(color => (
           <ColorCard
             key={color.id}
             color={color}
+            size={cardSize}
             onUpdate={updateColor}
             onRemove={removeColor}
           />

@@ -4,11 +4,12 @@ import './ColorCard.css';
 
 interface ColorCardProps {
   color: Color;
+  size?: 'small' | 'medium' | 'large';
   onUpdate: (id: string, updates: Partial<Color>) => void;
   onRemove: (id: string) => void;
 }
 
-const ColorCard: React.FC<ColorCardProps> = ({ color, onUpdate, onRemove }) => {
+const ColorCard: React.FC<ColorCardProps> = ({ color, size = 'medium', onUpdate, onRemove }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [tempHex, setTempHex] = useState(color.hex);
   const [tempName, setTempName] = useState(color.name || '');
@@ -34,7 +35,7 @@ const ColorCard: React.FC<ColorCardProps> = ({ color, onUpdate, onRemove }) => {
   };
 
   return (
-    <div className="color-card" style={{ backgroundColor: color.hex }}>
+    <div className={`color-card size-${size}`} style={{ backgroundColor: color.hex }}>
       <div className="color-card-content" style={{ color: textColor }}>
         <button
           className="remove-btn"

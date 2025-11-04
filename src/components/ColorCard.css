@@ -10,6 +10,21 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.color-card.size-small {
+  min-height: 140px;
+  border-radius: 8px;
+}
+
+.color-card.size-medium {
+  min-height: 200px;
+  border-radius: 12px;
+}
+
+.color-card.size-large {
+  min-height: 260px;
+  border-radius: 16px;
+}
+
 .color-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -122,6 +137,14 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+.color-card.size-small .color-name {
+  font-size: 1rem;
+}
+
+.color-card.size-large .color-name {
+  font-size: 1.4rem;
+}
+
 .color-formats {
   display: flex;
   flex-direction: column;
@@ -138,6 +161,16 @@
   font-size: 12px;
   transition: background-color 0.2s;
   cursor: pointer;
+}
+
+.color-card.size-small .format-item {
+  padding: 3px 6px;
+  font-size: 11px;
+}
+
+.color-card.size-large .format-item {
+  padding: 5px 10px;
+  font-size: 13px;
 }
 
 .format-item:hover {
