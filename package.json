@@ -2,6 +2,7 @@
   "name": "color-palette-builder",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ishanku.github.io/colors",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
