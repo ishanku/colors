@@ -11,6 +11,10 @@
     "@types/node": "^16.18.126",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
+    "chroma-js": "^3.1.2",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.3",
+    "papaparse": "^5.5.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-scripts": "5.0.1",
@@ -40,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/chroma-js": "^3.1.2",
+    "@types/papaparse": "^5.3.16"
   }
 }
