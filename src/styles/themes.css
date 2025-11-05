@@ -1,0 +1,322 @@
+/* CSS Custom Properties for Theme Support */
+:root {
+  /* Light Theme (Default) */
+  --bg-color: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+
+  --text-color: #212529;
+  --text-secondary: #495057;
+  --text-muted: #6c757d;
+
+  --border-color: #dee2e6;
+  --border-secondary: #e9ecef;
+
+  --hover-bg-color: #f8f9fa;
+  --hover-border-color: #adb5bd;
+
+  --accent-color: #007bff;
+  --accent-color-alpha: rgba(0, 123, 255, 0.25);
+
+  --success-color: #28a745;
+  --success-bg: #d4edda;
+  --success-border: #c3e6cb;
+
+  --warning-color: #ffc107;
+  --warning-bg: #fff3cd;
+  --warning-border: #ffeaa7;
+
+  --danger-color: #dc3545;
+  --danger-bg: #f8d7da;
+  --danger-border: #f5c6cb;
+
+  --info-color: #17a2b8;
+  --info-bg: #d1ecf1;
+  --info-border: #bee5eb;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+  /* Component specific */
+  --card-bg: #ffffff;
+  --card-border: #e9ecef;
+  --card-shadow: var(--shadow-sm);
+
+  --input-bg: #ffffff;
+  --input-border: #ced4da;
+  --input-focus-border: #007bff;
+
+  --button-primary-bg: #007bff;
+  --button-primary-hover: #0056b3;
+  --button-secondary-bg: #6c757d;
+  --button-secondary-hover: #545b62;
+
+  /* Accessibility panel colors */
+  --accessibility-bg: #f8f9fa;
+  --contrast-pass: #d4edda;
+  --contrast-fail: #f8d7da;
+  --contrast-pass-text: #155724;
+  --contrast-fail-text: #721c24;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-tertiary: #2d2d2d;
+
+  --text-color: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #9e9e9e;
+
+  --border-color: #404040;
+  --border-secondary: #2d2d2d;
+
+  --hover-bg-color: #2d2d2d;
+  --hover-border-color: #606060;
+
+  --accent-color: #4dabf7;
+  --accent-color-alpha: rgba(77, 171, 247, 0.25);
+
+  --success-color: #51cf66;
+  --success-bg: #2b8a3e;
+  --success-border: #37b24d;
+
+  --warning-color: #ffd43b;
+  --warning-bg: #e67700;
+  --warning-border: #fd7e14;
+
+  --danger-color: #ff6b6b;
+  --danger-bg: #c92a2a;
+  --danger-border: #e03131;
+
+  --info-color: #74c0fc;
+  --info-bg: #1971c2;
+  --info-border: #339af0;
+
+  /* Shadows for dark theme */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+  /* Component specific */
+  --card-bg: #1e1e1e;
+  --card-border: #404040;
+  --card-shadow: var(--shadow-sm);
+
+  --input-bg: #2d2d2d;
+  --input-border: #404040;
+  --input-focus-border: #4dabf7;
+
+  --button-primary-bg: #4dabf7;
+  --button-primary-hover: #339af0;
+  --button-secondary-bg: #495057;
+  --button-secondary-hover: #6c757d;
+
+  /* Accessibility panel colors for dark theme */
+  --accessibility-bg: #1e1e1e;
+  --contrast-pass: #2b8a3e;
+  --contrast-fail: #c92a2a;
+  --contrast-pass-text: #51cf66;
+  --contrast-fail-text: #ff6b6b;
+}
+
+/* Apply theme styles to body */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Global component theming */
+.color-palette-builder {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Header theming */
+.header {
+  border-bottom-color: var(--border-color);
+}
+
+.header h1 {
+  color: var(--text-color);
+}
+
+.tagline {
+  color: var(--text-secondary);
+}
+
+/* Input theming */
+.palette-name-input,
+.hex-input,
+.hex-input-small {
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border-color: var(--input-border);
+}
+
+.palette-name-input:focus,
+.hex-input:focus,
+.hex-input-small:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 2px var(--accent-color-alpha);
+}
+
+/* Button theming */
+.add-btn {
+  background-color: var(--button-primary-bg);
+  color: white;
+}
+
+.add-btn:hover {
+  background-color: var(--button-primary-hover);
+}
+
+.random-btn,
+.advanced-btn {
+  background-color: var(--button-secondary-bg);
+  color: white;
+}
+
+.random-btn:hover,
+.advanced-btn:hover {
+  background-color: var(--button-secondary-hover);
+}
+
+.clear-btn {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.clear-btn:hover {
+  background-color: var(--danger-bg);
+}
+
+.undo-btn,
+.redo-btn {
+  background-color: var(--bg-secondary);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.undo-btn:hover:not(:disabled),
+.redo-btn:hover:not(:disabled) {
+  background-color: var(--hover-bg-color);
+  border-color: var(--hover-border-color);
+}
+
+.undo-btn:disabled,
+.redo-btn:disabled {
+  background-color: var(--bg-tertiary);
+  color: var(--text-muted);
+  border-color: var(--border-secondary);
+}
+
+/* Card theming */
+.color-card {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+/* Panel theming */
+.accessibility-panel,
+.colorblindness-simulator {
+  background-color: var(--accessibility-bg);
+  border-color: var(--border-color);
+}
+
+.panel-header h3 {
+  color: var(--text-secondary);
+}
+
+/* Accessibility specific theming */
+.contrast-result .accessibility-level.pass .level-badge {
+  background-color: var(--contrast-pass);
+  color: var(--contrast-pass-text);
+}
+
+.contrast-result .accessibility-level.fail .level-badge {
+  background-color: var(--contrast-fail);
+  color: var(--contrast-fail-text);
+}
+
+.matrix-cell.ratio.pass {
+  background-color: var(--contrast-pass);
+  color: var(--contrast-pass-text);
+}
+
+.matrix-cell.ratio.fail {
+  background-color: var(--contrast-fail);
+  color: var(--contrast-fail-text);
+}
+
+/* Color blindness simulator theming */
+.palette-view {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.empty-message {
+  color: var(--text-muted);
+}
+
+/* Select and dropdown theming */
+.color-select,
+.type-dropdown {
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  border-color: var(--input-border);
+}
+
+.color-select:focus,
+.type-dropdown:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 2px var(--accent-color-alpha);
+}
+
+/* Labels and text theming */
+.color-selector label,
+.size-label,
+.type-selector label {
+  color: var(--text-secondary);
+}
+
+.color-count {
+  color: var(--text-muted);
+}
+
+/* Empty state theming */
+.empty-state {
+  color: var(--text-muted);
+}
+
+/* Color info theming */
+.color-name {
+  color: var(--text-secondary);
+}
+
+.color-hex {
+  color: var(--text-muted);
+}
+
+/* Note and warning theming */
+.accessibility-note {
+  background-color: var(--warning-bg);
+  border-color: var(--warning-border);
+  color: var(--warning-color);
+}
+
+[data-theme="dark"] .accessibility-note {
+  background-color: rgba(255, 212, 59, 0.15);
+  border-color: var(--warning-color);
+  color: var(--warning-color);
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}

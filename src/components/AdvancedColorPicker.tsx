@@ -15,7 +15,7 @@ const AdvancedColorPicker: React.FC<AdvancedColorPickerProps> = ({
   isOpen,
   onClose,
   onColorSelect,
-  initialColor = '#FF6B6B'
+  initialColor = '#002868'
 }) => {
   const [activeTab, setActiveTab] = useState<'wheel' | 'sliders' | 'presets' | 'gradients'>('wheel');
   const [currentColor, setCurrentColor] = useState(initialColor);

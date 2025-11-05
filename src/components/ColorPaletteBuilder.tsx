@@ -1,20 +1,35 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Color, generateRandomColor, isValidHex } from '../utils/colorUtils';
 import ColorCard from './ColorCard';
 import ExportControls from './ExportControls';
 import AdvancedColorPicker from './AdvancedColorPicker';
+import AccessibilityPanel from './AccessibilityPanel';
+import ColorBlindnessSimulator from './ColorBlindnessSimulator';
+import ThemeToggle from './ThemeToggle';
+import { useUndoRedo } from '../hooks/useUndoRedo';
 import './ColorPaletteBuilder.css';
 
 const ColorPaletteBuilder: React.FC = () => {
-  const [palette, setPalette] = useState<Color[]>([
+  const initialPalette: Color[] = [
     { id: '1', hex: '#FF6B6B', name: 'Coral Red' },
     { id: '2', hex: '#4ECDC4', name: 'Turquoise' },
     { id: '3', hex: '#45B7D1', name: 'Sky Blue' },
     { id: '4', hex: '#96CEB4', name: 'Mint Green' },
     { id: '5', hex: '#FFEAA7', name: 'Banana Yellow' }
-  ]);
+  ];
+
+  const {
+    state: palette,
+    setState: setPalette,
+    undo,
+    redo,
+    canUndo,
+    canRedo,
+    clearHistory
+  } = useUndoRedo<Color[]>(initialPalette);
+
   const [paletteName, setPaletteName] = useState('My Color Palette');
-  const [newColorHex, setNewColorHex] = useState('#000000');
+  const [newColorHex, setNewColorHex] = useState('#002868');
   const [isAdvancedPickerOpen, setIsAdvancedPickerOpen] = useState(false);
   const [cardSize, setCardSize] = useState<'small' | 'medium' | 'large'>('medium');
 
@@ -25,10 +40,10 @@ const ColorPaletteBuilder: React.FC = () => {
         hex: newColorHex.toUpperCase(),
         name: `Color ${palette.length + 1}`
       };
-      setPalette(prev => [...prev, newColor]);
+      setPalette([...palette, newColor]);
       setNewColorHex(generateRandomColor());
     }
-  }, [newColorHex, palette.length]);
+  }, [newColorHex, palette, setPalette]);
 
   const addRandomColor = useCallback(() => {
     const randomHex = generateRandomColor();
@@ -37,22 +52,22 @@ const ColorPaletteBuilder: React.FC = () => {
       hex: randomHex,
       name: `Color ${palette.length + 1}`
     };
-    setPalette(prev => [...prev, newColor]);
-  }, [palette.length]);
+    setPalette([...palette, newColor]);
+  }, [palette, setPalette]);
 
   const updateColor = useCallback((id: string, updates: Partial<Color>) => {
-    setPalette(prev => prev.map(color =>
+    setPalette(palette.map(color =>
       color.id === id ? { ...color, ...updates } : color
     ));
-  }, []);
+  }, [palette, setPalette]);
 
   const removeColor = useCallback((id: string) => {
-    setPalette(prev => prev.filter(color => color.id !== id));
-  }, []);
+    setPalette(palette.filter(color => color.id !== id));
+  }, [palette, setPalette]);
 
   const clearPalette = useCallback(() => {
     setPalette([]);
-  }, []);
+  }, [setPalette]);
 
   const handleAdvancedColorSelect = useCallback((color: string) => {
     setNewColorHex(color);
@@ -61,8 +76,28 @@ const ColorPaletteBuilder: React.FC = () => {
       hex: color,
       name: `Color ${palette.length + 1}`
     };
-    setPalette(prev => [...prev, newColor]);
-  }, [palette.length]);
+    setPalette([...palette, newColor]);
+  }, [palette, setPalette]);
+
+  const handleAddAccessibleColors = useCallback((colors: Color[]) => {
+    setPalette([...palette, ...colors]);
+  }, [palette, setPalette]);
+
+  // Keyboard shortcuts for undo/redo
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === 'z' && !event.shiftKey) {
+        event.preventDefault();
+        undo();
+      } else if ((event.metaKey || event.ctrlKey) && (event.key === 'y' || (event.key === 'z' && event.shiftKey))) {
+        event.preventDefault();
+        redo();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [undo, redo]);
 
   return (
     <div className="color-palette-builder">
@@ -85,7 +120,7 @@ const ColorPaletteBuilder: React.FC = () => {
           <p className="tagline">Create, customize, and export beautiful color palettes</p>
         </div>
         <div className="header-right">
-          {/* Future: Add user actions or settings */}
+          <ThemeToggle />
         </div>
       </header>
 
@@ -102,7 +137,7 @@ const ColorPaletteBuilder: React.FC = () => {
             value={newColorHex}
             onChange={(e) => setNewColorHex(e.target.value)}
             className="hex-input"
-            placeholder="#000000"
+            placeholder="#002868"
             pattern="^#[0-9A-Fa-f]{6}$"
           />
           <button onClick={addColor} className="add-btn">
@@ -118,6 +153,24 @@ const ColorPaletteBuilder: React.FC = () => {
 
         <div className="palette-controls">
           <div className="left-controls">
+            <div className="undo-redo-controls">
+              <button
+                onClick={undo}
+                disabled={!canUndo}
+                className="undo-btn"
+                title="Undo (Ctrl+Z)"
+              >
+                ↶ Undo
+              </button>
+              <button
+                onClick={redo}
+                disabled={!canRedo}
+                className="redo-btn"
+                title="Redo (Ctrl+Y)"
+              >
+                ↷ Redo
+              </button>
+            </div>
             <button onClick={clearPalette} className="clear-btn">
               Clear All
             </button>
@@ -174,7 +227,14 @@ const ColorPaletteBuilder: React.FC = () => {
       </div>
 
       {palette.length > 0 && (
-        <ExportControls palette={palette} paletteName={paletteName} />
+        <>
+          <AccessibilityPanel
+            palette={palette}
+            onAddColors={handleAddAccessibleColors}
+          />
+          <ColorBlindnessSimulator palette={palette} />
+          <ExportControls palette={palette} paletteName={paletteName} />
+        </>
       )}
 
       <AdvancedColorPicker

@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .header {
@@ -11,7 +13,7 @@
   justify-content: space-between;
   margin-bottom: 30px;
   padding: 20px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header-left {
@@ -32,7 +34,7 @@
 }
 
 .header h1 {
-  color: #333;
+  color: var(--text-color);
   margin: 0 0 8px 0;
   font-size: 2.2rem;
   font-weight: 600;
@@ -40,7 +42,7 @@
 }
 
 .tagline {
-  color: #666;
+  color: var(--text-secondary);
   margin: 0;
   font-size: 1rem;
   font-weight: 400;
@@ -62,16 +64,18 @@
 
 .palette-name-input {
   padding: 8px 12px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--input-border);
   border-radius: 6px;
   font-size: 14px;
   min-width: 200px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
   transition: border-color 0.2s;
 }
 
 .palette-name-input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: var(--input-focus-border);
 }
 
 .controls {
@@ -100,17 +104,19 @@
 
 .hex-input {
   padding: 8px 12px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--input-border);
   border-radius: 6px;
   font-family: monospace;
   font-size: 14px;
   width: 100px;
   text-transform: uppercase;
+  background-color: var(--input-bg);
+  color: var(--text-color);
 }
 
 .hex-input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: var(--input-focus-border);
 }
 
 .add-btn, .random-btn, .clear-btn, .advanced-btn {
@@ -123,30 +129,30 @@
 }
 
 .add-btn {
-  background-color: #007bff;
+  background-color: var(--button-primary-bg);
   color: white;
 }
 
 .add-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--button-primary-hover);
 }
 
 .random-btn {
-  background-color: #28a745;
+  background-color: var(--success-color);
   color: white;
 }
 
 .random-btn:hover {
-  background-color: #1e7e34;
+  background-color: var(--success-bg);
 }
 
 .clear-btn {
-  background-color: #dc3545;
+  background-color: var(--danger-color);
   color: white;
 }
 
 .clear-btn:hover {
-  background-color: #c82333;
+  background-color: var(--danger-bg);
 }
 
 .advanced-btn {
@@ -159,6 +165,37 @@
   background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.undo-redo-controls {
+  display: flex;
+  gap: 8px;
+  margin-right: 12px;
+}
+
+.undo-btn, .redo-btn {
+  padding: 6px 12px;
+  border: 1px solid #6c757d;
+  border-radius: 4px;
+  background: #f8f9fa;
+  color: #495057;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.undo-btn:hover:not(:disabled), .redo-btn:hover:not(:disabled) {
+  background: #e9ecef;
+  border-color: #495057;
+}
+
+.undo-btn:disabled, .redo-btn:disabled {
+  background: #f8f9fa;
+  color: #adb5bd;
+  border-color: #dee2e6;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .palette-controls {

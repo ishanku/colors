@@ -115,3 +115,185 @@ export const cartesianToPolar = (centerX: number, centerY: number, x: number, y:
   if (angle < 0) angle += 360;
   return { radius, angle };
 };
+
+// Accessibility Features
+export interface ContrastResult {
+  ratio: number;
+  level: 'AA' | 'AAA' | 'fail';
+  score: 'pass' | 'fail';
+}
+
+export const getContrastRatio = (color1: string, color2: string): number => {
+  try {
+    return chroma.contrast(color1, color2);
+  } catch {
+    return 1;
+  }
+};
+
+export const checkAccessibility = (foreground: string, background: string): ContrastResult => {
+  const ratio = getContrastRatio(foreground, background);
+
+  let level: 'AA' | 'AAA' | 'fail';
+  let score: 'pass' | 'fail';
+
+  if (ratio >= 7) {
+    level = 'AAA';
+    score = 'pass';
+  } else if (ratio >= 4.5) {
+    level = 'AA';
+    score = 'pass';
+  } else {
+    level = 'fail';
+    score = 'fail';
+  }
+
+  return { ratio, level, score };
+};
+
+export const getBestContrastColor = (backgroundColor: string, options: string[] = ['#000000', '#ffffff']): string => {
+  let bestColor = options[0];
+  let bestContrast = 0;
+
+  options.forEach(color => {
+    const contrast = getContrastRatio(color, backgroundColor);
+    if (contrast > bestContrast) {
+      bestContrast = contrast;
+      bestColor = color;
+    }
+  });
+
+  return bestColor;
+};
+
+export const generateAccessiblePalette = (baseColor: string, count: number = 5): Color[] => {
+  const colors: Color[] = [];
+  const base = chroma(baseColor);
+
+  // Generate colors with good contrast ratios
+  for (let i = 0; i < count; i++) {
+    const lightness = 0.2 + (i / (count - 1)) * 0.6; // Spread from 0.2 to 0.8
+    const newColor = base.set('hsl.l', lightness).hex();
+
+    colors.push({
+      id: `accessible-${i}`,
+      hex: newColor,
+      name: `Accessible ${i + 1}`
+    });
+  }
+
+  return colors;
+};
+
+// Color Blindness Simulation
+export type ColorBlindnessType = 'protanopia' | 'deuteranopia' | 'tritanopia' | 'protanomaly' | 'deuteranomaly' | 'tritanomaly' | 'achromatopsia' | 'achromatomaly';
+
+// Color blindness transformation matrices
+const BLINDNESS_MATRICES = {
+  protanopia: [
+    [0.567, 0.433, 0],
+    [0.558, 0.442, 0],
+    [0, 0.242, 0.758]
+  ],
+  deuteranopia: [
+    [0.625, 0.375, 0],
+    [0.7, 0.3, 0],
+    [0, 0.3, 0.7]
+  ],
+  tritanopia: [
+    [0.95, 0.05, 0],
+    [0, 0.433, 0.567],
+    [0, 0.475, 0.525]
+  ],
+  protanomaly: [
+    [0.817, 0.183, 0],
+    [0.333, 0.667, 0],
+    [0, 0.125, 0.875]
+  ],
+  deuteranomaly: [
+    [0.8, 0.2, 0],
+    [0.258, 0.742, 0],
+    [0, 0.142, 0.858]
+  ],
+  tritanomaly: [
+    [0.967, 0.033, 0],
+    [0, 0.733, 0.267],
+    [0, 0.183, 0.817]
+  ],
+  achromatopsia: [
+    [0.299, 0.587, 0.114],
+    [0.299, 0.587, 0.114],
+    [0.299, 0.587, 0.114]
+  ],
+  achromatomaly: [
+    [0.618, 0.320, 0.062],
+    [0.163, 0.775, 0.062],
+    [0.163, 0.320, 0.516]
+  ]
+};
+
+export const simulateColorBlindness = (hex: string, type: ColorBlindnessType): string => {
+  try {
+    const rgb = chroma(hex).rgb();
+    const matrix = BLINDNESS_MATRICES[type];
+
+    const r = Math.round(matrix[0][0] * rgb[0] + matrix[0][1] * rgb[1] + matrix[0][2] * rgb[2]);
+    const g = Math.round(matrix[1][0] * rgb[0] + matrix[1][1] * rgb[1] + matrix[1][2] * rgb[2]);
+    const b = Math.round(matrix[2][0] * rgb[0] + matrix[2][1] * rgb[1] + matrix[2][2] * rgb[2]);
+
+    return chroma.rgb(
+      Math.max(0, Math.min(255, r)),
+      Math.max(0, Math.min(255, g)),
+      Math.max(0, Math.min(255, b))
+    ).hex();
+  } catch {
+    return hex;
+  }
+};
+
+export const getColorBlindnessInfo = (type: ColorBlindnessType): { name: string; description: string; prevalence: string } => {
+  const info = {
+    protanopia: {
+      name: 'Protanopia',
+      description: 'Missing long-wavelength (red) photopigments',
+      prevalence: '~1% of males'
+    },
+    deuteranopia: {
+      name: 'Deuteranopia',
+      description: 'Missing medium-wavelength (green) photopigments',
+      prevalence: '~1% of males'
+    },
+    tritanopia: {
+      name: 'Tritanopia',
+      description: 'Missing short-wavelength (blue) photopigments',
+      prevalence: '~0.002% of population'
+    },
+    protanomaly: {
+      name: 'Protanomaly',
+      description: 'Shifted long-wavelength (red) photopigments',
+      prevalence: '~1% of males'
+    },
+    deuteranomaly: {
+      name: 'Deuteranomaly',
+      description: 'Shifted medium-wavelength (green) photopigments',
+      prevalence: '~5% of males, ~0.4% of females'
+    },
+    tritanomaly: {
+      name: 'Tritanomaly',
+      description: 'Shifted short-wavelength (blue) photopigments',
+      prevalence: '~0.01% of population'
+    },
+    achromatopsia: {
+      name: 'Achromatopsia',
+      description: 'Complete absence of color vision',
+      prevalence: '~0.003% of population'
+    },
+    achromatomaly: {
+      name: 'Achromatomaly',
+      description: 'Partial absence of color vision',
+      prevalence: '~0.001% of population'
+    }
+  };
+
+  return info[type];
+};

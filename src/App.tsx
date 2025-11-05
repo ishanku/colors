@@ -1,11 +1,12 @@
 import React from 'react';
-import ColorPaletteBuilder from './components/ColorPaletteBuilder';
+import ColorPaletteBuilderConsole from './components/ColorPaletteBuilderConsole';
 import './App.css';
+import './styles/themes.css';
 
 function App() {
   return (
     <div className="App">
-      <ColorPaletteBuilder />
+      <ColorPaletteBuilderConsole />
     </div>
   );
 }
