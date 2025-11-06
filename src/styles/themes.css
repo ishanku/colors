@@ -59,6 +59,15 @@
   --contrast-fail: #f8d7da;
   --contrast-pass-text: #155724;
   --contrast-fail-text: #721c24;
+
+  /* Console layout colors (light theme) */
+  --console-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+  --console-text: #212529;
+  --console-header-bg: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  --console-panel-bg: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  --console-border: #dee2e6;
+  --console-accent: #007bff;
+  --console-accent-glow: rgba(0, 123, 255, 0.3);
 }
 
 /* Dark Theme */
@@ -121,6 +130,15 @@
   --contrast-fail: #c92a2a;
   --contrast-pass-text: #51cf66;
   --contrast-fail-text: #ff6b6b;
+
+  /* Console layout colors (dark theme) */
+  --console-bg: linear-gradient(135deg, #0a0e1e 0%, #1a1a2e 50%, #16213e 100%);
+  --console-text: #e0e6ff;
+  --console-header-bg: linear-gradient(135deg, #1e2749 0%, #2a3663 100%);
+  --console-panel-bg: linear-gradient(135deg, #1a1d35 0%, #252849 100%);
+  --console-border: #3d5af1;
+  --console-accent: #3d5af1;
+  --console-accent-glow: rgba(61, 90, 241, 0.3);
 }
 
 /* Apply theme styles to body */

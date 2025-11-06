@@ -120,15 +120,18 @@
 }
 
 .console-grid.size-small {
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, 120px);
+  justify-content: center;
 }
 
 .console-grid.size-medium {
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, 160px);
+  justify-content: center;
 }
 
 .console-grid.size-large {
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, 200px);
+  justify-content: center;
 }
 
 /* Empty Console State */
@@ -221,15 +224,18 @@
   }
 
   .console-grid.size-small {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fill, 100px);
+    justify-content: center;
   }
 
   .console-grid.size-medium {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, 140px);
+    justify-content: center;
   }
 
   .console-grid.size-large {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, 180px);
+    justify-content: center;
   }
 }
 
@@ -253,15 +259,18 @@
   }
 
   .console-grid.size-small {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-template-columns: repeat(auto-fill, 80px);
+    justify-content: center;
   }
 
   .console-grid.size-medium {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, 120px);
+    justify-content: center;
   }
 
   .console-grid.size-large {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, 160px);
+    justify-content: center;
   }
 
   .empty-console {

@@ -11,8 +11,12 @@
 }
 
 .color-card.size-small {
-  min-height: 140px;
+  min-height: 120px;
   border-radius: 8px;
+}
+
+.color-card.size-small .color-card-content {
+  padding: 12px;
 }
 
 .color-card.size-medium {
@@ -138,7 +142,8 @@
 }
 
 .color-card.size-small .color-name {
-  font-size: 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
 }
 
 .color-card.size-large .color-name {
@@ -149,6 +154,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.color-card.size-small .color-formats {
+  gap: 4px;
 }
 
 .format-item {

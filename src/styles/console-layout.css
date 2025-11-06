@@ -10,8 +10,8 @@
   min-height: 100vh;
   gap: 16px;
   padding: 16px;
-  background: linear-gradient(135deg, #0a0e1e 0%, #1a1a2e 50%, #16213e 100%);
-  color: #e0e6ff;
+  background: var(--console-bg, linear-gradient(135deg, #0a0e1e 0%, #1a1a2e 50%, #16213e 100%));
+  color: var(--console-text, #e0e6ff);
   font-family: 'Orbitron', 'Roboto Mono', monospace;
 }
 
@@ -22,11 +22,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 24px;
-  background: linear-gradient(135deg, #1e2749 0%, #2a3663 100%);
-  border: 2px solid #3d5af1;
+  background: var(--console-header-bg);
+  border: 2px solid var(--console-accent);
   border-radius: 16px;
   box-shadow:
-    0 0 20px rgba(61, 90, 241, 0.3),
+    0 0 20px var(--console-accent-glow),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
@@ -39,7 +39,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(61, 90, 241, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, var(--console-accent-glow), transparent);
   animation: scan 3s linear infinite;
 }
 
@@ -135,8 +135,8 @@
 
 /* Console Panels */
 .console-panel {
-  background: linear-gradient(135deg, #1a1d35 0%, #252849 100%);
-  border: 2px solid #2a3663;
+  background: var(--console-panel-bg);
+  border: 2px solid var(--console-border);
   border-radius: 12px;
   padding: 20px;
   box-shadow:
@@ -147,10 +147,10 @@
 }
 
 .console-panel:hover {
-  border-color: #3d5af1;
+  border-color: var(--console-accent);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(61, 90, 241, 0.2),
+    0 0 20px var(--console-accent-glow),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
@@ -190,13 +190,13 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background: linear-gradient(135deg, #1a1d35 0%, #252849 100%);
-  border: 2px solid #3d5af1;
+  background: var(--console-panel-bg);
+  border: 2px solid var(--console-accent);
   border-radius: 16px;
   padding: 24px;
   box-shadow:
     0 12px 40px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(61, 90, 241, 0.2),
+    0 0 30px var(--console-accent-glow),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
@@ -209,7 +209,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #00d4ff, #3d5af1, #ff0080, transparent);
+  background: linear-gradient(90deg, transparent, var(--console-accent), transparent);
   animation: flow 4s linear infinite;
 }
 
@@ -252,10 +252,10 @@
 
 /* Console Buttons */
 .console-btn {
-  background: linear-gradient(135deg, #2a3663 0%, #3d5af1 100%);
-  border: 2px solid #3d5af1;
+  background: linear-gradient(135deg, var(--console-border) 0%, var(--console-accent) 100%);
+  border: 2px solid var(--console-accent);
   border-radius: 8px;
-  color: #ffffff;
+  color: var(--console-text);
   padding: 12px 20px;
   font-family: 'Roboto Mono', monospace;
   font-weight: 600;
@@ -335,10 +335,10 @@
 
 /* Console Inputs */
 .console-input {
-  background: linear-gradient(135deg, #0a0d1a 0%, #151829 100%);
-  border: 2px solid #2a3663;
+  background: var(--input-bg);
+  border: 2px solid var(--console-border);
   border-radius: 8px;
-  color: #e0e6ff;
+  color: var(--console-text);
   padding: 12px 16px;
   font-family: 'Roboto Mono', monospace;
   font-size: 0.9rem;
@@ -348,10 +348,10 @@
 
 .console-input:focus {
   outline: none;
-  border-color: #3d5af1;
+  border-color: var(--console-accent);
   box-shadow:
     inset 0 2px 8px rgba(0, 0, 0, 0.3),
-    0 0 15px rgba(61, 90, 241, 0.4);
+    0 0 15px var(--console-accent-glow);
 }
 
 .console-input::placeholder {
