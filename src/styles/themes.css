@@ -374,32 +374,52 @@ body {
 /* Global Scrollbar Styling */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--console-accent, var(--accent-color)) var(--console-border, var(--border-color));
+  scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
 }
 
 *::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--console-panel-bg, var(--bg-secondary));
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, var(--console-accent, var(--accent-color)) 0%, var(--console-border, var(--border-color)) 100%);
-  border-radius: 4px;
-  border: 1px solid var(--console-accent, var(--accent-color));
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  border: none;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: var(--console-accent, var(--accent-color));
-  box-shadow: 0 0 8px var(--console-accent-glow, var(--accent-color-alpha));
+  background: rgba(0, 0, 0, 0.3);
 }
 
 *::-webkit-scrollbar-corner {
-  background: var(--console-panel-bg, var(--bg-secondary));
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark theme scrollbar */
+[data-theme="dark"] * {
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] *::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] *::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] *::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] *::-webkit-scrollbar-corner {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* Light theme button overrides for better readability */
