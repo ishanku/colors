@@ -103,6 +103,32 @@ const ColorPaletteBuilder: React.FC = () => {
     <div className="color-palette-builder">
       <header className="header">
         <div className="header-left">
+          <div className="size-controls">
+            <label className="size-label">Card Size:</label>
+            <div className="size-toggle">
+              <button
+                className={`size-btn ${cardSize === 'small' ? 'active' : ''}`}
+                onClick={() => setCardSize('small')}
+                title="Small cards"
+              >
+                S
+              </button>
+              <button
+                className={`size-btn ${cardSize === 'medium' ? 'active' : ''}`}
+                onClick={() => setCardSize('medium')}
+                title="Medium cards"
+              >
+                M
+              </button>
+              <button
+                className={`size-btn ${cardSize === 'large' ? 'active' : ''}`}
+                onClick={() => setCardSize('large')}
+                title="Large cards"
+              >
+                L
+              </button>
+            </div>
+          </div>
           <div className="palette-name-section">
             <label htmlFor="palette-name">Palette Name:</label>
             <input
@@ -144,32 +170,7 @@ const ColorPaletteBuilder: React.FC = () => {
 
       <div className="controls">
         <div className="left-controls-section">
-          <div className="size-controls">
-            <label className="size-label">Card Size:</label>
-            <div className="size-toggle">
-              <button
-                className={`size-btn ${cardSize === 'small' ? 'active' : ''}`}
-                onClick={() => setCardSize('small')}
-                title="Small cards"
-              >
-                S
-              </button>
-              <button
-                className={`size-btn ${cardSize === 'medium' ? 'active' : ''}`}
-                onClick={() => setCardSize('medium')}
-                title="Medium cards"
-              >
-                M
-              </button>
-              <button
-                className={`size-btn ${cardSize === 'large' ? 'active' : ''}`}
-                onClick={() => setCardSize('large')}
-                title="Large cards"
-              >
-                L
-              </button>
-            </div>
-          </div>
+          {/* Space for additional controls if needed */}
         </div>
 
         <div className="center-controls-section">

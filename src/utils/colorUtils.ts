@@ -56,7 +56,14 @@ export const isValidHex = (hex: string): boolean => {
 export const getContrastColor = (hex: string): string => {
   try {
     const color = chroma(hex);
-    return color.luminance() > 0.5 ? '#000000' : '#ffffff';
+    const luminance = color.luminance();
+
+    // More strict contrast threshold for better readability
+    if (luminance > 0.4) {
+      return '#000000';
+    } else {
+      return '#ffffff';
+    }
   } catch {
     return '#000000';
   }

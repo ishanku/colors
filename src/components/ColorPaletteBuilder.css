@@ -1,25 +1,31 @@
 .color-palette-builder {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 15px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
-  padding: 20px 0;
+  margin-bottom: 20px;
+  padding: 15px 0;
   border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
 }
 
 .header-left {
   flex: 1;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .header-center {
@@ -107,9 +113,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
+  flex-shrink: 0;
 }
 
 .left-controls-section {
@@ -326,7 +333,8 @@
 
 .palette-grid {
   display: grid;
-  gap: 20px;
+  gap: 15px;
+  flex: 1;
   margin-bottom: 40px;
   transition: all 0.3s ease;
 }
@@ -362,22 +370,30 @@
 }
 
 @media (max-width: 768px) {
+  .color-palette-builder {
+    padding: 10px;
+  }
+
   .header {
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     text-align: center;
-    padding: 15px 0;
+    padding: 10px 0;
+    margin-bottom: 15px;
   }
 
   .header-left,
   .header-center,
   .header-right {
     flex: none;
+    width: 100%;
   }
 
   .header-left {
     order: 2;
     justify-content: center;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .header-center {
@@ -420,6 +436,8 @@
 
   .controls {
     flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
   }
 
   .left-controls-section,
@@ -440,7 +458,13 @@
 
   .right-controls-section {
     order: 3;
-    align-items: stretch;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .palette-grid {
+    gap: 10px;
   }
 
   .add-color-section {

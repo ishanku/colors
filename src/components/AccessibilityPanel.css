@@ -1,8 +1,8 @@
 .accessibility-panel {
   background: var(--accessibility-bg);
   border-radius: 12px;
-  padding: 20px;
-  margin: 20px 0;
+  padding: 15px;
+  margin: 15px 0;
   border: 1px solid var(--border-color);
 }
 
