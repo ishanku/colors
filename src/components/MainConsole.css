@@ -6,10 +6,10 @@
   align-items: center;
   margin-bottom: 20px;
   padding: 16px 20px;
-  background: linear-gradient(135deg, #0a0d1a 0%, #151829 100%);
-  border: 1px solid #3d5af1;
+  background: var(--console-panel-bg);
+  border: 1px solid var(--console-accent);
   border-radius: 8px;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .palette-name-section {
@@ -34,15 +34,15 @@
   max-width: 300px;
   font-size: 1rem;
   padding: 10px 14px;
-  background: linear-gradient(135deg, #1a1d35 0%, #252849 100%);
-  border: 1px solid #2a3663;
-  color: #e0e6ff;
+  background: var(--input-bg);
+  border: 1px solid var(--console-border);
+  color: var(--console-text);
   font-family: 'Roboto Mono', monospace;
 }
 
 .palette-name-input:focus {
-  border-color: #00d4ff;
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+  border-color: var(--console-accent);
+  box-shadow: 0 0 15px var(--console-accent-glow);
 }
 
 .console-status {
@@ -85,8 +85,8 @@
 }
 
 .screen-border {
-  background: linear-gradient(135deg, #0a0d1a 0%, #151829 100%);
-  border: 2px solid #2a3663;
+  background: var(--console-screen-bg, linear-gradient(135deg, #0a0d1a 0%, #151829 100%));
+  border: 2px solid var(--console-border);
   border-radius: 12px;
   padding: 20px;
   min-height: 400px;
@@ -117,11 +117,13 @@
   padding: 10px;
   position: relative;
   z-index: 1;
+  transition: grid-template-columns 0.3s ease, gap 0.3s ease;
 }
 
 .console-grid.size-small {
-  grid-template-columns: repeat(auto-fill, 120px);
+  grid-template-columns: repeat(auto-fill, 90px);
   justify-content: center;
+  gap: 12px;
 }
 
 .console-grid.size-medium {
@@ -224,8 +226,9 @@
   }
 
   .console-grid.size-small {
-    grid-template-columns: repeat(auto-fill, 100px);
+    grid-template-columns: repeat(auto-fill, 80px);
     justify-content: center;
+    gap: 10px;
   }
 
   .console-grid.size-medium {
@@ -259,8 +262,9 @@
   }
 
   .console-grid.size-small {
-    grid-template-columns: repeat(auto-fill, 80px);
+    grid-template-columns: repeat(auto-fill, 70px);
     justify-content: center;
+    gap: 8px;
   }
 
   .console-grid.size-medium {

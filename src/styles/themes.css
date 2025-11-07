@@ -61,11 +61,12 @@
   --contrast-fail-text: #721c24;
 
   /* Console layout colors (light theme) */
-  --console-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+  --console-bg: #f8f9fa;
   --console-text: #212529;
-  --console-header-bg: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  --console-panel-bg: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  --console-border: #dee2e6;
+  --console-header-bg: #ffffff;
+  --console-panel-bg: #ffffff;
+  --console-screen-bg: #ffffff;
+  --console-border: #e9ecef;
   --console-accent: #007bff;
   --console-accent-glow: rgba(0, 123, 255, 0.3);
 }
@@ -136,6 +137,7 @@
   --console-text: #e0e6ff;
   --console-header-bg: linear-gradient(135deg, #1e2749 0%, #2a3663 100%);
   --console-panel-bg: linear-gradient(135deg, #1a1d35 0%, #252849 100%);
+  --console-screen-bg: linear-gradient(135deg, #0a0d1a 0%, #151829 100%);
   --console-border: #3d5af1;
   --console-accent: #3d5af1;
   --console-accent-glow: rgba(61, 90, 241, 0.3);
@@ -284,16 +286,51 @@ body {
 
 /* Select and dropdown theming */
 .color-select,
-.type-dropdown {
+.type-dropdown,
+.contrast-select {
   background-color: var(--input-bg);
   color: var(--text-color);
-  border-color: var(--input-border);
+  border: 2px solid var(--console-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233d5af1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .color-select:focus,
-.type-dropdown:focus {
-  border-color: var(--input-focus-border);
-  box-shadow: 0 0 0 2px var(--accent-color-alpha);
+.type-dropdown:focus,
+.contrast-select:focus {
+  outline: none;
+  border-color: var(--console-accent);
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.2),
+    0 0 15px var(--console-accent-glow);
+}
+
+.color-select:hover,
+.type-dropdown:hover,
+.contrast-select:hover {
+  border-color: var(--console-accent);
+  background-color: var(--hover-bg-color);
+}
+
+/* Dark theme dropdown arrow */
+[data-theme="dark"] .color-select,
+[data-theme="dark"] .type-dropdown,
+[data-theme="dark"] .contrast-select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300d4ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
 }
 
 /* Labels and text theming */
@@ -332,6 +369,69 @@ body {
   background-color: rgba(255, 212, 59, 0.15);
   border-color: var(--warning-color);
   color: var(--warning-color);
+}
+
+/* Global Scrollbar Styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--console-accent, var(--accent-color)) var(--console-border, var(--border-color));
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--console-panel-bg, var(--bg-secondary));
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--console-accent, var(--accent-color)) 0%, var(--console-border, var(--border-color)) 100%);
+  border-radius: 4px;
+  border: 1px solid var(--console-accent, var(--accent-color));
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--console-accent, var(--accent-color));
+  box-shadow: 0 0 8px var(--console-accent-glow, var(--accent-color-alpha));
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--console-panel-bg, var(--bg-secondary));
+}
+
+/* Light theme button overrides for better readability */
+:root .console-btn {
+  color: #ffffff;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+}
+
+:root .console-btn:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+  color: #ffffff;
+}
+
+:root .console-btn.danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: #ffffff;
+}
+
+:root .console-btn.success {
+  background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+  color: #ffffff;
+}
+
+/* Color card format items theming */
+.format-item {
+  background: rgba(0, 0, 0, 0.08) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme="dark"] .format-item {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 /* Smooth transitions for theme changes */

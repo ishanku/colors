@@ -35,8 +35,19 @@ const ColorCard: React.FC<ColorCardProps> = ({ color, size = 'medium', variant =
     navigator.clipboard.writeText(text);
   };
 
+  const handleRightClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    copyToClipboard(color.hex);
+    // Optional: Show a brief notification that the color was copied
+    console.log(`Copied ${color.hex} to clipboard`);
+  };
+
   return (
-    <div className={`color-card size-${size} variant-${variant}`} style={{ backgroundColor: color.hex }}>
+    <div
+      className={`color-card size-${size} variant-${variant}`}
+      style={{ backgroundColor: color.hex }}
+      onContextMenu={handleRightClick}
+    >
       <div className="color-card-content" style={{ color: textColor }}>
         <button
           className="remove-btn"

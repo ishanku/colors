@@ -123,6 +123,48 @@
   height: fit-content;
   max-height: calc(100vh - 140px);
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--console-accent) var(--console-border);
+}
+
+/* Custom Scrollbar for Webkit browsers */
+.left-sidebar::-webkit-scrollbar,
+.right-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.left-sidebar::-webkit-scrollbar-track,
+.right-sidebar::-webkit-scrollbar-track {
+  background: var(--console-panel-bg);
+  border-radius: 4px;
+  border: 1px solid var(--console-border);
+}
+
+.left-sidebar::-webkit-scrollbar-thumb,
+.right-sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--console-accent) 0%, var(--console-border) 100%);
+  border-radius: 4px;
+  border: 1px solid var(--console-accent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.left-sidebar::-webkit-scrollbar-thumb:hover,
+.right-sidebar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #3d5af1 0%, #5b7cff 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 8px var(--console-accent-glow);
+}
+
+.left-sidebar::-webkit-scrollbar-thumb:active,
+.right-sidebar::-webkit-scrollbar-thumb:active {
+  background: var(--console-accent);
+}
+
+/* Corner styling */
+.left-sidebar::-webkit-scrollbar-corner,
+.right-sidebar::-webkit-scrollbar-corner {
+  background: var(--console-panel-bg);
 }
 
 .left-sidebar {
@@ -144,6 +186,32 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   position: relative;
   transition: all 0.3s ease;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--console-accent) var(--console-border);
+}
+
+/* Console panel scrollbar styling */
+.console-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.console-panel::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.console-panel::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--console-accent) 0%, var(--console-border) 100%);
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.console-panel::-webkit-scrollbar-thumb:hover {
+  background: var(--console-accent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 6px var(--console-accent-glow);
 }
 
 .console-panel:hover {
@@ -199,7 +267,34 @@
     0 0 30px var(--console-accent-glow),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   position: relative;
-  overflow: hidden;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--console-accent) var(--console-border);
+}
+
+/* Main console scrollbar styling */
+.main-console::-webkit-scrollbar {
+  width: 10px;
+}
+
+.main-console::-webkit-scrollbar-track {
+  background: var(--console-screen-bg);
+  border-radius: 5px;
+  border: 1px solid var(--console-border);
+}
+
+.main-console::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--console-accent) 0%, var(--console-border) 100%);
+  border-radius: 5px;
+  border: 1px solid var(--console-accent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.main-console::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #3d5af1 0%, #5b7cff 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 10px var(--console-accent-glow);
 }
 
 .main-console::before {

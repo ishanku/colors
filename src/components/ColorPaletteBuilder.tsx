@@ -120,64 +120,30 @@ const ColorPaletteBuilder: React.FC = () => {
           <p className="tagline">Create, customize, and export beautiful color palettes</p>
         </div>
         <div className="header-right">
+          <div className="color-input-section">
+            <input
+              type="color"
+              value={newColorHex}
+              onChange={(e) => setNewColorHex(e.target.value)}
+              className="color-picker"
+              title="Pick a color"
+            />
+            <input
+              type="text"
+              value={newColorHex}
+              onChange={(e) => setNewColorHex(e.target.value)}
+              className="hex-input-small"
+              placeholder="#002868"
+              pattern="^#[0-9A-Fa-f]{6}$"
+              title="Enter hex color code"
+            />
+          </div>
           <ThemeToggle />
         </div>
       </header>
 
       <div className="controls">
-        <div className="add-color-section">
-          <input
-            type="color"
-            value={newColorHex}
-            onChange={(e) => setNewColorHex(e.target.value)}
-            className="color-picker"
-          />
-          <input
-            type="text"
-            value={newColorHex}
-            onChange={(e) => setNewColorHex(e.target.value)}
-            className="hex-input"
-            placeholder="#002868"
-            pattern="^#[0-9A-Fa-f]{6}$"
-          />
-          <button onClick={addColor} className="add-btn">
-            Add Color
-          </button>
-          <button onClick={addRandomColor} className="random-btn">
-            Add Random
-          </button>
-          <button onClick={() => setIsAdvancedPickerOpen(true)} className="advanced-btn">
-            🎨 Advanced Picker
-          </button>
-        </div>
-
-        <div className="palette-controls">
-          <div className="left-controls">
-            <div className="undo-redo-controls">
-              <button
-                onClick={undo}
-                disabled={!canUndo}
-                className="undo-btn"
-                title="Undo (Ctrl+Z)"
-              >
-                ↶ Undo
-              </button>
-              <button
-                onClick={redo}
-                disabled={!canRedo}
-                className="redo-btn"
-                title="Redo (Ctrl+Y)"
-              >
-                ↷ Redo
-              </button>
-            </div>
-            <button onClick={clearPalette} className="clear-btn">
-              Clear All
-            </button>
-            <span className="color-count">
-              {palette.length} color{palette.length !== 1 ? 's' : ''}
-            </span>
-          </div>
+        <div className="left-controls-section">
           <div className="size-controls">
             <label className="size-label">Card Size:</label>
             <div className="size-toggle">
@@ -204,6 +170,47 @@ const ColorPaletteBuilder: React.FC = () => {
               </button>
             </div>
           </div>
+        </div>
+
+        <div className="center-controls-section">
+          <button onClick={addColor} className="add-btn primary">
+            ➕ Add Color
+          </button>
+          <div className="secondary-actions">
+            <button onClick={addRandomColor} className="random-btn">
+              🎲 Random
+            </button>
+            <button onClick={() => setIsAdvancedPickerOpen(true)} className="advanced-btn">
+              🎨 Advanced
+            </button>
+          </div>
+        </div>
+
+        <div className="right-controls-section">
+          <div className="undo-redo-controls">
+            <button
+              onClick={undo}
+              disabled={!canUndo}
+              className="undo-btn"
+              title="Undo (Ctrl+Z)"
+            >
+              ↶ Undo
+            </button>
+            <button
+              onClick={redo}
+              disabled={!canRedo}
+              className="redo-btn"
+              title="Redo (Ctrl+Y)"
+            >
+              ↷ Redo
+            </button>
+          </div>
+          <button onClick={clearPalette} className="clear-btn">
+            🗑️ Clear All
+          </button>
+          <span className="color-count">
+            {palette.length} color{palette.length !== 1 ? 's' : ''}
+          </span>
         </div>
       </div>
 

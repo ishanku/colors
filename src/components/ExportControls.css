@@ -1,14 +1,14 @@
 .export-controls {
-  background: #f8f9fa;
+  background-color: var(--accessibility-bg);
   border-radius: 12px;
   padding: 24px;
   text-align: center;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-color);
 }
 
 .export-controls h3 {
   margin: 0 0 20px 0;
-  color: #333;
+  color: var(--text-color);
   font-size: 1.4rem;
   font-weight: 500;
 }
@@ -59,7 +59,7 @@
 }
 
 .export-info {
-  color: #666;
+  color: var(--text-muted);
   font-size: 14px;
   margin: 0;
   line-height: 1.4;

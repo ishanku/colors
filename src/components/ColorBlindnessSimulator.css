@@ -61,20 +61,7 @@
   color: #495057;
 }
 
-.type-dropdown {
-  padding: 8px 12px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-  background: white;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
-
-.type-dropdown:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
+/* Dropdown styling is now handled by themes.css */
 
 .type-info {
   flex: 1;
@@ -113,25 +100,25 @@
 }
 
 .palette-view {
-  background: white;
+  background-color: var(--card-bg);
   border-radius: 8px;
   padding: 16px;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--card-border);
 }
 
 .palette-view h4 {
   margin: 0 0 16px 0;
-  color: #495057;
+  color: var(--text-secondary);
   font-size: 1rem;
   text-align: center;
 }
 
 .normal-view {
-  border-left: 4px solid #28a745;
+  border-left: 4px solid var(--success-color);
 }
 
 .simulated-view {
-  border-left: 4px solid #ffc107;
+  border-left: 4px solid var(--warning-color);
 }
 
 .color-grid {
@@ -171,13 +158,13 @@
 .color-name {
   font-size: 0.8rem;
   font-weight: 500;
-  color: #495057;
+  color: var(--text-secondary);
 }
 
 .color-hex {
   font-size: 0.75rem;
   font-family: monospace;
-  color: #6c757d;
+  color: var(--text-muted);
 }
 
 .accessibility-note {

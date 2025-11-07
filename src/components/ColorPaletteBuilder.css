@@ -31,6 +31,31 @@
   flex: 1;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+}
+
+.color-input-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hex-input-small {
+  padding: 6px 10px;
+  border: 2px solid var(--input-border);
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 12px;
+  width: 80px;
+  text-transform: uppercase;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+}
+
+.hex-input-small:focus {
+  outline: none;
+  border-color: var(--input-focus-border);
 }
 
 .header h1 {
@@ -57,7 +82,7 @@
 
 .palette-name-section label {
   font-weight: 500;
-  color: #555;
+  color: var(--text-secondary);
   font-size: 14px;
   white-space: nowrap;
 }
@@ -85,6 +110,30 @@
   margin-bottom: 30px;
   flex-wrap: wrap;
   gap: 20px;
+}
+
+.left-controls-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.center-controls-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.secondary-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.right-controls-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .add-color-section {
@@ -133,17 +182,32 @@
   color: white;
 }
 
-.add-btn:hover {
+.add-btn.primary {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--button-primary-bg) 0%, var(--button-primary-hover) 100%);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  border-radius: 8px;
+}
+
+.add-btn:hover,
+.add-btn.primary:hover {
   background-color: var(--button-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
 }
 
 .random-btn {
   background-color: var(--success-color);
   color: white;
+  padding: 8px 14px;
+  font-size: 14px;
 }
 
 .random-btn:hover {
-  background-color: var(--success-bg);
+  background-color: #218838;
+  transform: translateY(-1px);
 }
 
 .clear-btn {
@@ -159,6 +223,7 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   font-size: 14px;
+  padding: 8px 14px;
 }
 
 .advanced-btn:hover {
@@ -175,10 +240,10 @@
 
 .undo-btn, .redo-btn {
   padding: 6px 12px;
-  border: 1px solid #6c757d;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
-  background: #f8f9fa;
-  color: #495057;
+  background-color: var(--bg-secondary);
+  color: var(--text-color);
   cursor: pointer;
   font-size: 12px;
   font-weight: 500;
@@ -186,14 +251,14 @@
 }
 
 .undo-btn:hover:not(:disabled), .redo-btn:hover:not(:disabled) {
-  background: #e9ecef;
-  border-color: #495057;
+  background-color: var(--hover-bg-color);
+  border-color: var(--hover-border-color);
 }
 
 .undo-btn:disabled, .redo-btn:disabled {
-  background: #f8f9fa;
-  color: #adb5bd;
-  border-color: #dee2e6;
+  background-color: var(--bg-tertiary);
+  color: var(--text-muted);
+  border-color: var(--border-secondary);
   cursor: not-allowed;
   opacity: 0.6;
 }
@@ -220,15 +285,15 @@
 
 .size-label {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 .size-toggle {
   display: flex;
-  background: #f8f9fa;
+  background-color: var(--bg-secondary);
   border-radius: 6px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-color);
   overflow: hidden;
 }
 
@@ -239,23 +304,23 @@
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
-  color: #6c757d;
+  color: var(--text-muted);
   transition: all 0.2s;
   min-width: 32px;
 }
 
 .size-btn:hover {
-  background: #e9ecef;
-  color: #333;
+  background-color: var(--hover-bg-color);
+  color: var(--text-color);
 }
 
 .size-btn.active {
-  background: #007bff;
+  background-color: var(--accent-color);
   color: white;
 }
 
 .color-count {
-  color: #666;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
@@ -285,10 +350,10 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 60px 20px;
-  color: #666;
-  background-color: #f8f9fa;
+  color: var(--text-muted);
+  background-color: var(--bg-secondary);
   border-radius: 12px;
-  border: 2px dashed #ddd;
+  border: 2px dashed var(--border-color);
 }
 
 .empty-state p {
@@ -344,8 +409,37 @@
     max-width: 280px;
   }
 
+  .color-input-section {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hex-input-small {
+    width: 100px;
+  }
+
   .controls {
     flex-direction: column;
+  }
+
+  .left-controls-section,
+  .center-controls-section,
+  .right-controls-section {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .center-controls-section {
+    order: 1;
+  }
+
+  .left-controls-section {
+    order: 2;
+  }
+
+  .right-controls-section {
+    order: 3;
     align-items: stretch;
   }
 
