@@ -14,7 +14,7 @@
 
 .setting-label {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #00d4ff;
   margin-bottom: 4px;
 }
@@ -32,7 +32,7 @@
 }
 
 .size-btn.active {
-  background: linear-gradient(135deg, #00d4ff 0%, #3d5af1 100%);
+  background: linear-gradient(125deg, #00d4ff 0%, #3d5af1 100%);
   border-color: #00d4ff;
   box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
 }
@@ -41,7 +41,7 @@
 .accessibility-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 15px;
 }
 
 .score-display {
@@ -51,10 +51,11 @@
 }
 
 .score-circle {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border: 3px solid var(--console-accent);
   border-radius: 50%;
+  font-size: smaller;
   display: flex;
   flex-direction: column;
   align-items: center;

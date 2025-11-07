@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { HSV, hsvToHex, hexToHsv, polarToCartesian, cartesianToPolar } from '../utils/colorUtils';
+import { HSV, hsvToHex, hexToHsv, polarToCartesian, cartesianToPolar, hsvToRgb } from '../utils/colorUtils';
 
 interface ColorWheelProps {
   color: string;
@@ -38,38 +38,16 @@ const ColorWheel: React.FC<ColorWheelProps> = ({ color, size = 200, onChange }) 
           let angle = Math.atan2(dy, dx) * 180 / Math.PI + 90;
           if (angle < 0) angle += 360;
 
-          const saturation = Math.min(distance / radius, 1);
+          const saturation = Math.min(distance / radius, 1) * 100;
           const hue = angle;
 
-          // Convert HSV to RGB
-          const h = hue / 60;
-          const s = saturation;
-          const v = hsv.v / 100;
-
-          const c = v * s;
-          const x1 = c * (1 - Math.abs((h % 2) - 1));
-          const m = v - c;
-
-          let r = 0, g = 0, b = 0;
-
-          if (h >= 0 && h < 1) {
-            r = c; g = x1; b = 0;
-          } else if (h >= 1 && h < 2) {
-            r = x1; g = c; b = 0;
-          } else if (h >= 2 && h < 3) {
-            r = 0; g = c; b = x1;
-          } else if (h >= 3 && h < 4) {
-            r = 0; g = x1; b = c;
-          } else if (h >= 4 && h < 5) {
-            r = x1; g = 0; b = c;
-          } else if (h >= 5 && h < 6) {
-            r = c; g = 0; b = x1;
-          }
+          // Convert HSV to RGB using utility function
+          const [r, g, b] = hsvToRgb(hue, saturation, hsv.v);
 
           const pixelIndex = (y * size + x) * 4;
-          data[pixelIndex] = Math.round((r + m) * 255);
-          data[pixelIndex + 1] = Math.round((g + m) * 255);
-          data[pixelIndex + 2] = Math.round((b + m) * 255);
+          data[pixelIndex] = r;
+          data[pixelIndex + 1] = g;
+          data[pixelIndex + 2] = b;
           data[pixelIndex + 3] = 255;
         }
       }
@@ -104,7 +82,7 @@ const ColorWheel: React.FC<ColorWheelProps> = ({ color, size = 200, onChange }) 
     handleMouseMove(event);
   };
 
-  const handleMouseMove = (event: React.MouseEvent | MouseEvent) => {
+  const handleMouseMove = useCallback((event: React.MouseEvent | MouseEvent) => {
     if (!isDragging && event.type !== 'mousedown') return;
 
     const canvas = canvasRef.current;
@@ -124,7 +102,7 @@ const ColorWheel: React.FC<ColorWheelProps> = ({ color, size = 200, onChange }) 
       setHsv(newHsv);
       onChange(hsvToHex(newHsv.h, newHsv.s, newHsv.v));
     }
-  };
+  }, [isDragging, center, radius, hsv, onChange]);
 
   const handleMouseUp = () => {
     setIsDragging(false);

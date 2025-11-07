@@ -149,15 +149,15 @@ const ColorPaletteBuilder: React.FC = () => {
           <div className="color-input-section">
             <input
               type="color"
-              value={newColorHex}
-              onChange={(e) => setNewColorHex(e.target.value)}
+              value={newColorHex.toLowerCase()}
+              onChange={(e) => setNewColorHex(e.target.value.toUpperCase())}
               className="color-picker"
               title="Pick a color"
             />
             <input
               type="text"
               value={newColorHex}
-              onChange={(e) => setNewColorHex(e.target.value)}
+              onChange={(e) => setNewColorHex(e.target.value.toUpperCase())}
               className="hex-input-small"
               placeholder="#002868"
               pattern="^#[0-9A-Fa-f]{6}$"
@@ -251,6 +251,12 @@ const ColorPaletteBuilder: React.FC = () => {
         onColorSelect={handleAdvancedColorSelect}
         initialColor={newColorHex}
       />
+
+      <footer className="page-footer">
+        <p className="resolution-notice">
+          💡 This page is best viewed at 1200px width or higher for optimal experience
+        </p>
+      </footer>
     </div>
   );
 };
