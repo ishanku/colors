@@ -143,15 +143,15 @@ const ColorPaletteBuilderConsole: React.FC = () => {
 
       {/* Left Sidebar - Settings & Operations */}
       <LeftSidebar
-        onUndo={undo}
-        onRedo={redo}
+        palette={palette}
+        paletteName={paletteName}
         onClearPalette={clearPalette}
         onGenerateAccessible={generateAccessible}
-        canUndo={canUndo}
-        canRedo={canRedo}
         paletteLength={palette.length}
         cardSize={cardSize}
         onCardSizeChange={setCardSize}
+        onExportPDF={handleExportPDF}
+        onExportCSV={handleExportCSV}
       />
 
       {/* Main Console */}
@@ -162,19 +162,21 @@ const ColorPaletteBuilderConsole: React.FC = () => {
         cardSize={cardSize}
         onUpdateColor={updateColor}
         onRemoveColor={removeColor}
+        onUndo={undo}
+        onRedo={redo}
+        canUndo={canUndo}
+        canRedo={canRedo}
+        onExportPDF={handleExportPDF}
+        onExportCSV={handleExportCSV}
       />
 
-      {/* Right Sidebar - Color Input & Analysis */}
+      {/* Right Sidebar - Color Input */}
       <RightSidebar
-        palette={palette}
-        paletteName={paletteName}
         newColorHex={newColorHex}
         setNewColorHex={setNewColorHex}
         onAddColor={addColor}
         onAddRandomColor={addRandomColor}
         onOpenAdvancedPicker={() => setIsAdvancedPickerOpen(true)}
-        onExportPDF={handleExportPDF}
-        onExportCSV={handleExportCSV}
       />
 
       {/* Advanced Color Picker Modal */}
