@@ -16,6 +16,8 @@ interface MainConsoleProps {
   canRedo: boolean;
   onExportPDF: () => void;
   onExportCSV: () => void;
+  onClearPalette: () => void;
+  onGenerateAccessible: () => void;
 }
 
 const MainConsole: React.FC<MainConsoleProps> = ({
@@ -30,7 +32,9 @@ const MainConsole: React.FC<MainConsoleProps> = ({
   canUndo,
   canRedo,
   onExportPDF,
-  onExportCSV
+  onExportCSV,
+  onClearPalette,
+  onGenerateAccessible
 }) => {
   return (
     <div className="main-console">
@@ -50,57 +54,71 @@ const MainConsole: React.FC<MainConsoleProps> = ({
           />
         </div>
 
-        {/* Control Actions */}
-        <div className="control-actions">
-          <div className="action-group undo-redo-group">
-            <button
-              onClick={onUndo}
-              disabled={!canUndo}
-              className="console-btn action-btn"
-              title="Undo (Ctrl+Z)"
-            >
-              ↶
-            </button>
-            <button
-              onClick={onRedo}
-              disabled={!canRedo}
-              className="console-btn action-btn"
-              title="Redo (Ctrl+Y)"
-            >
-              ↷
-            </button>
-          </div>
-          <div className="action-group export-group">
-            <button
-              onClick={onExportPDF}
-              disabled={palette.length === 0}
-              className="console-btn action-btn"
-              title="Export as PDF"
-            >
-              📄
-            </button>
-            <button
-              onClick={onExportCSV}
-              disabled={palette.length === 0}
-              className="console-btn action-btn"
-              title="Export as CSV"
-            >
-              📊
-            </button>
-            <button
-              disabled={palette.length === 0}
-              className="console-btn action-btn"
-              title="Share Palette"
-            >
-              🔗
-            </button>
-            <button
-              className="console-btn action-btn"
-              title="Import Palette"
-            >
-              📥
-            </button>
-          </div>
+        {/* Control Actions Toolbar */}
+        <div className="toolbar">
+          <button
+            onClick={onUndo}
+            disabled={!canUndo}
+            className="toolbar-btn"
+            title="Undo (Ctrl+Z)"
+          >
+            ⟲
+          </button>
+          <button
+            onClick={onRedo}
+            disabled={!canRedo}
+            className="toolbar-btn"
+            title="Redo (Ctrl+Y)"
+          >
+            ⟳
+          </button>
+          <div className="toolbar-separator"></div>
+          <button
+            onClick={onExportPDF}
+            disabled={palette.length === 0}
+            className="toolbar-btn"
+            title="Export as PDF"
+          >
+            📄
+          </button>
+          <button
+            onClick={onExportCSV}
+            disabled={palette.length === 0}
+            className="toolbar-btn"
+            title="Export as CSV"
+          >
+            📊
+          </button>
+          <button
+            disabled={palette.length === 0}
+            className="toolbar-btn"
+            title="Share Palette"
+          >
+            🔗
+          </button>
+          <button
+            className="toolbar-btn"
+            title="Import Palette"
+          >
+            📥
+          </button>
+          <div className="toolbar-separator"></div>
+          <button
+            onClick={onClearPalette}
+            disabled={palette.length === 0}
+            className="toolbar-btn danger"
+            title="Clear All Colors"
+          >
+            🗑️
+          </button>
+          <button
+            onClick={onGenerateAccessible}
+            disabled={palette.length === 0}
+            className="toolbar-btn success"
+            title="Generate Accessible Colors"
+          >
+            ♿
+          </button>
         </div>
 
         <div className="console-status">

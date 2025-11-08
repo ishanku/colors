@@ -141,17 +141,11 @@ const ColorPaletteBuilderConsole: React.FC = () => {
         </div>
       </div>
 
-      {/* Left Sidebar - Settings & Operations */}
+      {/* Left Sidebar - Settings & Vision Simulation */}
       <LeftSidebar
         palette={palette}
-        paletteName={paletteName}
-        onClearPalette={clearPalette}
-        onGenerateAccessible={generateAccessible}
-        paletteLength={palette.length}
         cardSize={cardSize}
         onCardSizeChange={setCardSize}
-        onExportPDF={handleExportPDF}
-        onExportCSV={handleExportCSV}
       />
 
       {/* Main Console */}
@@ -168,10 +162,13 @@ const ColorPaletteBuilderConsole: React.FC = () => {
         canRedo={canRedo}
         onExportPDF={handleExportPDF}
         onExportCSV={handleExportCSV}
+        onClearPalette={clearPalette}
+        onGenerateAccessible={generateAccessible}
       />
 
-      {/* Right Sidebar - Color Input */}
+      {/* Right Sidebar - Color Input & Accessibility */}
       <RightSidebar
+        palette={palette}
         newColorHex={newColorHex}
         setNewColorHex={setNewColorHex}
         onAddColor={addColor}
