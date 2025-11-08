@@ -372,10 +372,11 @@ body {
 }
 
 /* Global Scrollbar Styling - Material Design inspired */
+/* Light theme scrollbar */
 * {
   /* Firefox scrollbar */
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.26) transparent;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
 /* Webkit scrollbars (Chrome, Safari, Edge) */
@@ -390,7 +391,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.26);
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   border: 2px solid transparent;
   background-clip: content-box;
@@ -398,12 +399,12 @@ body {
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.38);
+  background: rgba(0, 0, 0, 0.3);
   background-clip: content-box;
 }
 
 *::-webkit-scrollbar-thumb:active {
-  background: rgba(0, 0, 0, 0.54);
+  background: rgba(0, 0, 0, 0.4);
   background-clip: content-box;
 }
 
@@ -413,21 +414,21 @@ body {
 
 /* Dark theme scrollbar - Material Design dark theme */
 [data-theme="dark"] * {
-  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
 
 [data-theme="dark"] *::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
   background-clip: content-box;
 }
 
 [data-theme="dark"] *::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.35);
   background-clip: content-box;
 }
 
 [data-theme="dark"] *::-webkit-scrollbar-thumb:active {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.45);
   background-clip: content-box;
 }
 

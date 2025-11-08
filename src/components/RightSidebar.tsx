@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { Color, ColorBlindnessType, simulateColorBlindness, getColorBlindnessInfo, checkAccessibility } from '../utils/colorUtils';
+import { Color, ColorBlindnessType, simulateColorBlindness, getColorBlindnessInfo, checkAccessibility, isValidHex } from '../utils/colorUtils';
 import ThemeToggle from './ThemeToggle';
 import './RightSidebar.css';
 
 interface RightSidebarProps {
   palette: Color[];
   paletteName: string;
-  cardSize: 'small' | 'medium' | 'large';
-  onCardSizeChange: (size: 'small' | 'medium' | 'large') => void;
+  newColorHex: string;
+  setNewColorHex: (color: string) => void;
+  onAddColor: () => void;
+  onAddRandomColor: () => void;
+  onOpenAdvancedPicker: () => void;
   onExportPDF: () => void;
   onExportCSV: () => void;
 }
@@ -15,8 +18,11 @@ interface RightSidebarProps {
 const RightSidebar: React.FC<RightSidebarProps> = ({
   palette,
   paletteName,
-  cardSize,
-  onCardSizeChange,
+  newColorHex,
+  setNewColorHex,
+  onAddColor,
+  onAddRandomColor,
+  onOpenAdvancedPicker,
   onExportPDF,
   onExportCSV
 }) => {
@@ -52,34 +58,58 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
 
   return (
     <div className="right-sidebar">
-      {/* Settings Panel */}
+      {/* Color Input Panel */}
       <div className="console-panel">
         <div className="panel-header">
           <h3 className="panel-title">
-            <div className="panel-icon">⚙️</div>
-            Settings
+            <div className="panel-icon">🎨</div>
+            Color Input
           </h3>
         </div>
 
-        <div className="settings-section">
-          <div className="setting-group">
-            <label className="setting-label">Theme:</label>
-            <ThemeToggle />
+        <div className="color-input-section">
+          <div className="color-picker-group">
+            <input
+              type="color"
+              value={newColorHex}
+              onChange={(e) => setNewColorHex(e.target.value)}
+              className="console-color-picker"
+            />
+            <input
+              type="text"
+              value={newColorHex}
+              onChange={(e) => setNewColorHex(e.target.value)}
+              className="console-input hex-input"
+              placeholder="#002868"
+              pattern="^#[0-9A-Fa-f]{6}$"
+            />
+          </div>
+
+          <div className="action-buttons">
+            <button
+              onClick={onAddColor}
+              className="console-btn success"
+              disabled={!isValidHex(newColorHex)}
+            >
+              Add Color
+            </button>
+            <button
+              onClick={onAddRandomColor}
+              className="console-btn"
+            >
+              Random
+            </button>
+            <button
+              onClick={onOpenAdvancedPicker}
+              className="console-btn"
+            >
+              Advanced
+            </button>
           </div>
 
           <div className="setting-group">
-            <label className="setting-label">Card Size:</label>
-            <div className="size-buttons">
-              {(['small', 'medium', 'large'] as const).map(size => (
-                <button
-                  key={size}
-                  onClick={() => onCardSizeChange(size)}
-                  className={`console-btn size-btn ${cardSize === size ? 'active' : ''}`}
-                >
-                  {size.charAt(0).toUpperCase()}
-                </button>
-              ))}
-            </div>
+            <label className="setting-label">Theme:</label>
+            <ThemeToggle />
           </div>
         </div>
       </div>

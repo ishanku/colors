@@ -1,5 +1,46 @@
 /* Right Sidebar Styles */
 
+.color-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.color-picker-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.console-color-picker {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #3d5af1;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(61, 90, 241, 0.3);
+}
+
+.console-color-picker:hover {
+  box-shadow: 0 0 20px rgba(61, 90, 241, 0.6);
+  transform: scale(1.05);
+}
+
+.hex-input {
+  flex: 1;
+  text-transform: uppercase;
+  font-family: 'Roboto Mono', monospace;
+  letter-spacing: 1px;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .settings-section {
   display: flex;
   flex-direction: column;
@@ -14,7 +55,7 @@
 
 .setting-label {
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #00d4ff;
   margin-bottom: 4px;
 }
@@ -32,7 +73,7 @@
 }
 
 .size-btn.active {
-  background: linear-gradient(125deg, #00d4ff 0%, #3d5af1 100%);
+  background: linear-gradient(135deg, #00d4ff 0%, #3d5af1 100%);
   border-color: #00d4ff;
   box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
 }
@@ -41,7 +82,7 @@
 .accessibility-section {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 16px;
 }
 
 .score-display {
@@ -51,11 +92,10 @@
 }
 
 .score-circle {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border: 3px solid var(--console-accent);
   border-radius: 50%;
-  font-size: smaller;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -58,8 +58,9 @@ export const getContrastColor = (hex: string): string => {
     const color = chroma(hex);
     const luminance = color.luminance();
 
-    // More strict contrast threshold for better readability
-    if (luminance > 0.4) {
+    // Enhanced contrast calculation for better readability
+    // Uses a slightly lower threshold for better readability on mid-tone colors
+    if (luminance > 0.45) {
       return '#000000';
     } else {
       return '#ffffff';

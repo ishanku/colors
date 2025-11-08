@@ -1,13 +1,7 @@
 import React from 'react';
-import { isValidHex } from '../utils/colorUtils';
 import './LeftSidebar.css';
 
 interface LeftSidebarProps {
-  newColorHex: string;
-  setNewColorHex: (color: string) => void;
-  onAddColor: () => void;
-  onAddRandomColor: () => void;
-  onOpenAdvancedPicker: () => void;
   onUndo: () => void;
   onRedo: () => void;
   onClearPalette: () => void;
@@ -15,89 +9,47 @@ interface LeftSidebarProps {
   canUndo: boolean;
   canRedo: boolean;
   paletteLength: number;
+  cardSize: 'small' | 'medium' | 'large';
+  onCardSizeChange: (size: 'small' | 'medium' | 'large') => void;
 }
 
 const LeftSidebar: React.FC<LeftSidebarProps> = ({
-  newColorHex,
-  setNewColorHex,
-  onAddColor,
-  onAddRandomColor,
-  onOpenAdvancedPicker,
   onUndo,
   onRedo,
   onClearPalette,
   onGenerateAccessible,
   canUndo,
   canRedo,
-  paletteLength
+  paletteLength,
+  cardSize,
+  onCardSizeChange
 }) => {
-  const quickPresets = [
-    { color: '#FF6B6B', name: 'Coral' },
-    { color: '#4ECDC4', name: 'Teal' },
-    { color: '#45B7D1', name: 'Blue' },
-    { color: '#96CEB4', name: 'Mint' },
-    { color: '#FFEAA7', name: 'Yellow' },
-    { color: '#DDA0DD', name: 'Plum' },
-    { color: '#FF9F43', name: 'Orange' },
-    { color: '#5F27CD', name: 'Purple' }
-  ];
-
-  const recentColors = JSON.parse(localStorage.getItem('recentColors') || '[]').slice(0, 6);
-
-  const handlePresetClick = (color: string) => {
-    setNewColorHex(color);
-    onAddColor();
-  };
 
   return (
     <div className="left-sidebar">
-      {/* Color Input Panel */}
+      {/* Settings Panel */}
       <div className="console-panel">
         <div className="panel-header">
           <h3 className="panel-title">
-            <div className="panel-icon">🎨</div>
-            Color Input
+            <div className="panel-icon">⚙️</div>
+            Settings
           </h3>
         </div>
 
-        <div className="color-input-section">
-          <div className="color-picker-group">
-            <input
-              type="color"
-              value={newColorHex}
-              onChange={(e) => setNewColorHex(e.target.value)}
-              className="console-color-picker"
-            />
-            <input
-              type="text"
-              value={newColorHex}
-              onChange={(e) => setNewColorHex(e.target.value)}
-              className="console-input hex-input"
-              placeholder="#002868"
-              pattern="^#[0-9A-Fa-f]{6}$"
-            />
-          </div>
-
-          <div className="action-buttons">
-            <button
-              onClick={onAddColor}
-              className="console-btn success"
-              disabled={!isValidHex(newColorHex)}
-            >
-              Add Color
-            </button>
-            <button
-              onClick={onAddRandomColor}
-              className="console-btn"
-            >
-              Random
-            </button>
-            <button
-              onClick={onOpenAdvancedPicker}
-              className="console-btn"
-            >
-              🎨 Advanced
-            </button>
+        <div className="settings-section">
+          <div className="setting-group">
+            <label className="setting-label">Card Size:</label>
+            <div className="size-buttons">
+              {(['small', 'medium', 'large'] as const).map(size => (
+                <button
+                  key={size}
+                  onClick={() => onCardSizeChange(size)}
+                  className={`console-btn size-btn ${cardSize === size ? 'active' : ''}`}
+                >
+                  {size.charAt(0).toUpperCase()}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>

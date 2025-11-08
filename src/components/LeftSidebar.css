@@ -1,5 +1,44 @@
 /* Left Sidebar Styles */
 
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.setting-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #00d4ff;
+  margin-bottom: 4px;
+}
+
+.size-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.size-btn {
+  background: rgba(61, 90, 241, 0.1);
+  border: 2px solid rgba(61, 90, 241, 0.3);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  min-width: 40px;
+}
+
+.size-btn.active {
+  background: linear-gradient(135deg, #00d4ff 0%, #3d5af1 100%);
+  border-color: #00d4ff;
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+}
+
 .color-input-section {
   display: flex;
   flex-direction: column;

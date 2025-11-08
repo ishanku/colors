@@ -479,26 +479,3 @@
     grid-template-columns: 1fr;
   }
 }
-
-/* Footer styling */
-.page-footer {
-  margin-top: 40px;
-  padding: 20px 0;
-  border-top: 1px solid var(--border-color);
-  text-align: center;
-}
-
-.resolution-notice {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  font-style: italic;
-  opacity: 0.8;
-}
-
-/* Hide footer on smaller screens since they already have responsive design */
-@media (max-width: 1199px) {
-  .page-footer {
-    display: none;
-  }
-}
