@@ -97,53 +97,6 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
         </div>
       </div>
 
-      {/* Quick Presets */}
-      <div className="console-panel">
-        <div className="panel-header">
-          <h3 className="panel-title">
-            <div className="panel-icon">🌈</div>
-            Quick Colors
-          </h3>
-        </div>
-
-        <div className="preset-grid">
-          {quickPresets.map((preset, index) => (
-            <button
-              key={index}
-              onClick={() => handlePresetClick(preset.color)}
-              className="preset-color"
-              style={{ backgroundColor: preset.color }}
-              title={`${preset.name} - ${preset.color}`}
-            >
-              <span className="preset-label">{preset.name}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Recent Colors */}
-      {recentColors.length > 0 && (
-        <div className="console-panel">
-          <div className="panel-header">
-            <h3 className="panel-title">
-              <div className="panel-icon">🕒</div>
-              Recent
-            </h3>
-          </div>
-
-          <div className="recent-colors">
-            {recentColors.map((color: string, index: number) => (
-              <button
-                key={index}
-                onClick={() => handlePresetClick(color)}
-                className="recent-color"
-                style={{ backgroundColor: color }}
-                title={color}
-              />
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 };
