@@ -62,7 +62,7 @@ const MainConsole: React.FC<MainConsoleProps> = ({
             className="toolbar-btn"
             title="Undo (Ctrl+Z)"
           >
-            ⟲
+            ↶
           </button>
           <button
             onClick={onRedo}
@@ -70,7 +70,7 @@ const MainConsole: React.FC<MainConsoleProps> = ({
             className="toolbar-btn"
             title="Redo (Ctrl+Y)"
           >
-            ⟳
+            ↷
           </button>
           <div className="toolbar-separator"></div>
           <button
@@ -79,7 +79,7 @@ const MainConsole: React.FC<MainConsoleProps> = ({
             className="toolbar-btn"
             title="Export as PDF"
           >
-            📄
+            ▼
           </button>
           <button
             onClick={onExportCSV}
@@ -87,37 +87,37 @@ const MainConsole: React.FC<MainConsoleProps> = ({
             className="toolbar-btn"
             title="Export as CSV"
           >
-            📊
+            ≡
           </button>
           <button
             disabled={palette.length === 0}
             className="toolbar-btn"
             title="Share Palette"
           >
-            🔗
+            ↗
           </button>
           <button
             className="toolbar-btn"
             title="Import Palette"
           >
-            📥
+            ▲
           </button>
           <div className="toolbar-separator"></div>
-          <button
-            onClick={onClearPalette}
-            disabled={palette.length === 0}
-            className="toolbar-btn danger"
-            title="Clear All Colors"
-          >
-            🗑️
-          </button>
           <button
             onClick={onGenerateAccessible}
             disabled={palette.length === 0}
             className="toolbar-btn success"
             title="Generate Accessible Colors"
           >
-            ♿
+            ✓
+          </button>
+          <button
+            onClick={onClearPalette}
+            disabled={palette.length === 0}
+            className="toolbar-btn danger"
+            title="Clear All Colors"
+          >
+            ×
           </button>
         </div>
 

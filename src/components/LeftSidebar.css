@@ -30,13 +30,23 @@
   border-radius: 6px;
   padding: 8px 12px;
   font-size: 0.8rem;
+  font-weight: 700;
   min-width: 40px;
+  color: var(--console-text) !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.size-btn:hover {
+  background: rgba(61, 90, 241, 0.2);
+  border-color: rgba(61, 90, 241, 0.5);
 }
 
 .size-btn.active {
   background: linear-gradient(135deg, #00d4ff 0%, #3d5af1 100%);
   border-color: #00d4ff;
   box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+  color: #ffffff !important;
 }
 
 .color-input-section {

@@ -58,13 +58,12 @@ export const getContrastColor = (hex: string): string => {
     const color = chroma(hex);
     const luminance = color.luminance();
 
-    // Enhanced contrast calculation for better readability
-    // Uses a slightly lower threshold for better readability on mid-tone colors
-    if (luminance > 0.45) {
-      return '#000000';
-    } else {
-      return '#ffffff';
-    }
+    // More aggressive contrast for better readability in both themes
+    // Test both black and white and choose the one with better contrast
+    const blackContrast = chroma.contrast(hex, '#000000');
+    const whiteContrast = chroma.contrast(hex, '#ffffff');
+
+    return blackContrast > whiteContrast ? '#000000' : '#ffffff';
   } catch {
     return '#000000';
   }
