@@ -62,7 +62,7 @@ const MainConsole: React.FC<MainConsoleProps> = ({
             className="toolbar-btn"
             title="Undo (Ctrl+Z)"
           >
-            ↶
+            ⟲
           </button>
           <button
             onClick={onRedo}
@@ -70,7 +70,7 @@ const MainConsole: React.FC<MainConsoleProps> = ({
             className="toolbar-btn"
             title="Redo (Ctrl+Y)"
           >
-            ↷
+            ⟳
           </button>
           <div className="toolbar-separator"></div>
           <button

@@ -24,6 +24,16 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
     bg: '#FFFFFF'
   });
 
+  // Common background colors for accessibility testing
+  const commonBackgrounds = [
+    { name: 'White', hex: '#FFFFFF' },
+    { name: 'Light Gray', hex: '#F5F5F5' },
+    { name: 'Medium Gray', hex: '#9CA3AF' },
+    { name: 'Dark Gray', hex: '#374151' },
+    { name: 'Black', hex: '#000000' },
+    ...palette.map(color => ({ name: color.name || color.hex, hex: color.hex }))
+  ];
+
   const getAccessibilityScore = () => {
     if (palette.length < 2) return 0;
     let passCount = 0;
@@ -117,23 +127,45 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
             <div className="contrast-checker">
               <label className="setting-label">Quick Contrast Check:</label>
               <div className="contrast-inputs">
-                <select
-                  value={selectedContrastColors.fg}
-                  onChange={(e) => setSelectedContrastColors(prev => ({ ...prev, fg: e.target.value }))}
-                  className="console-input contrast-select"
+                <div className="contrast-row">
+                  <label className="contrast-label">Text Color:</label>
+                  <select
+                    value={selectedContrastColors.fg}
+                    onChange={(e) => setSelectedContrastColors(prev => ({ ...prev, fg: e.target.value }))}
+                    className="console-input contrast-select"
+                  >
+                    {palette.map(color => (
+                      <option key={color.id} value={color.hex}>
+                        {color.name || color.hex}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="contrast-row">
+                  <label className="contrast-label">Background:</label>
+                  <select
+                    value={selectedContrastColors.bg}
+                    onChange={(e) => setSelectedContrastColors(prev => ({ ...prev, bg: e.target.value }))}
+                    className="console-input contrast-select"
+                  >
+                    {commonBackgrounds.map((bg, index) => (
+                      <option key={index} value={bg.hex}>
+                        {bg.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div className="contrast-preview">
+                <div
+                  className="contrast-sample"
+                  style={{
+                    backgroundColor: selectedContrastColors.bg,
+                    color: selectedContrastColors.fg
+                  }}
                 >
-                  {palette.map(color => (
-                    <option key={color.id} value={color.hex}>
-                      {color.name || color.hex}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="color"
-                  value={selectedContrastColors.bg}
-                  onChange={(e) => setSelectedContrastColors(prev => ({ ...prev, bg: e.target.value }))}
-                  className="console-color-picker small"
-                />
+                  Sample Text
+                </div>
               </div>
               <div className={`contrast-result ${contrastResult.score}`}>
                 <span className="ratio">{contrastResult.ratio.toFixed(2)}:1</span>
