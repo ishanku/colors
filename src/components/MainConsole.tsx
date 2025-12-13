@@ -40,18 +40,31 @@ const MainConsole: React.FC<MainConsoleProps> = ({
     <div className="main-console">
       {/* Console Screen Header */}
       <div className="console-screen-header">
-        <div className="palette-name-section">
-          <label htmlFor="palette-name" className="console-label">
-            PALETTE.NAME &gt;
-          </label>
-          <input
-            id="palette-name"
-            type="text"
-            value={paletteName}
-            onChange={(e) => setPaletteName(e.target.value)}
-            className="console-input palette-name-input"
-            placeholder="Enter palette name..."
-          />
+        <div className="header-top">
+          <div className="palette-name-section">
+            <label htmlFor="palette-name" className="console-label">
+              PALETTE.NAME &gt;
+            </label>
+            <input
+              id="palette-name"
+              type="text"
+              value={paletteName}
+              onChange={(e) => setPaletteName(e.target.value)}
+              className="console-input palette-name-input"
+              placeholder="Enter palette name..."
+            />
+          </div>
+
+          <div className="console-status">
+            <div className="status-item">
+              <span className="status-label">COLORS:</span>
+              <span className="status-value">{palette.length.toString().padStart(2, '0')}</span>
+            </div>
+            <div className="status-item">
+              <span className="status-label">STATUS:</span>
+              <span className="status-value online">ONLINE</span>
+            </div>
+          </div>
         </div>
 
         {/* Control Actions Toolbar */}
@@ -79,7 +92,7 @@ const MainConsole: React.FC<MainConsoleProps> = ({
             className="toolbar-btn"
             title="Export as PDF"
           >
-            ▼
+            📄
           </button>
           <button
             onClick={onExportCSV}
@@ -87,20 +100,20 @@ const MainConsole: React.FC<MainConsoleProps> = ({
             className="toolbar-btn"
             title="Export as CSV"
           >
-            ≡
+            📊
           </button>
           <button
             disabled={palette.length === 0}
             className="toolbar-btn"
             title="Share Palette"
           >
-            ↗
+            🔗
           </button>
           <button
             className="toolbar-btn"
             title="Import Palette"
           >
-            ▲
+            📁
           </button>
           <div className="toolbar-separator"></div>
           <button
@@ -109,7 +122,7 @@ const MainConsole: React.FC<MainConsoleProps> = ({
             className="toolbar-btn success"
             title="Generate Accessible Colors"
           >
-            ✓
+            ✨
           </button>
           <button
             onClick={onClearPalette}
@@ -117,19 +130,8 @@ const MainConsole: React.FC<MainConsoleProps> = ({
             className="toolbar-btn danger"
             title="Clear All Colors"
           >
-            ×
+            🗑️
           </button>
-        </div>
-
-        <div className="console-status">
-          <div className="status-item">
-            <span className="status-label">COLORS:</span>
-            <span className="status-value">{palette.length.toString().padStart(2, '0')}</span>
-          </div>
-          <div className="status-item">
-            <span className="status-label">STATUS:</span>
-            <span className="status-value online">ONLINE</span>
-          </div>
         </div>
       </div>
 
