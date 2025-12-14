@@ -89,14 +89,15 @@ const ColorPaletteBuilderConsole: React.FC = () => {
   }, [palette, setPalette]);
 
   const handleAdvancedColorSelect = useCallback((color: string) => {
-    setNewColorHex(color);
+    const upperCaseColor = color.toUpperCase();
+    setNewColorHex(upperCaseColor);
     const newColor: Color = {
       id: Date.now().toString(),
-      hex: color,
+      hex: upperCaseColor,
       name: `Color ${palette.length + 1}`
     };
     setPalette([...palette, newColor]);
-    saveRecentColor(color);
+    saveRecentColor(upperCaseColor);
   }, [palette, setPalette, saveRecentColor]);
 
   const handleExportPDF = useCallback(() => {

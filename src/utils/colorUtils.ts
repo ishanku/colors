@@ -23,7 +23,7 @@ export const convertColor = (hex: string): ColorFormats => {
     const cmyk = color.cmyk();
 
     return {
-      hex: color.hex(),
+      hex: color.hex().toUpperCase(),
       rgb: `rgb(${Math.round(rgb[0])}, ${Math.round(rgb[1])}, ${Math.round(rgb[2])})`,
       hsl: `hsl(${Math.round(hsl[0] || 0)}, ${Math.round(hsl[1] * 100)}%, ${Math.round(hsl[2] * 100)}%)`,
       cmyk: `cmyk(${Math.round(cmyk[0] * 100)}%, ${Math.round(cmyk[1] * 100)}%, ${Math.round(cmyk[2] * 100)}%, ${Math.round(cmyk[3] * 100)}%)`,
@@ -41,7 +41,7 @@ export const convertColor = (hex: string): ColorFormats => {
 };
 
 export const generateRandomColor = (): string => {
-  return chroma.random().hex();
+  return chroma.random().hex().toUpperCase();
 };
 
 export const isValidHex = (hex: string): boolean => {
@@ -91,7 +91,7 @@ export const hexToHsv = (hex: string): HSV => {
 
 export const hsvToHex = (h: number, s: number, v: number): string => {
   try {
-    return chroma.hsv(h, s / 100, v / 100).hex();
+    return chroma.hsv(h, s / 100, v / 100).hex().toUpperCase();
   } catch {
     return '#000000';
   }
@@ -180,7 +180,7 @@ export const generateAccessiblePalette = (baseColor: string, count: number = 5):
   // Generate colors with good contrast ratios
   for (let i = 0; i < count; i++) {
     const lightness = 0.2 + (i / (count - 1)) * 0.6; // Spread from 0.2 to 0.8
-    const newColor = base.set('hsl.l', lightness).hex();
+    const newColor = base.set('hsl.l', lightness).hex().toUpperCase();
 
     colors.push({
       id: `accessible-${i}`,
