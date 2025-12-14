@@ -69,13 +69,13 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
             <input
               type="color"
               value={newColorHex}
-              onChange={(e) => setNewColorHex(e.target.value)}
+              onChange={(e) => setNewColorHex(e.target.value.toUpperCase())}
               className="console-color-picker"
             />
             <input
               type="text"
               value={newColorHex}
-              onChange={(e) => setNewColorHex(e.target.value)}
+              onChange={(e) => setNewColorHex(e.target.value.toUpperCase())}
               className="console-input hex-input"
               placeholder="#002868"
               pattern="^#[0-9A-Fa-f]{6}$"
