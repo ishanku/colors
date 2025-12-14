@@ -55,10 +55,6 @@ export const isValidHex = (hex: string): boolean => {
 
 export const getContrastColor = (hex: string): string => {
   try {
-    const color = chroma(hex);
-    const luminance = color.luminance();
-
-    // More aggressive contrast for better readability in both themes
     // Test both black and white and choose the one with better contrast
     const blackContrast = chroma.contrast(hex, '#000000');
     const whiteContrast = chroma.contrast(hex, '#ffffff');

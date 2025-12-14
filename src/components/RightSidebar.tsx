@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Color, isValidHex, checkAccessibility } from '../utils/colorUtils';
+import React, { useState, useEffect } from 'react';
+import { Color, isValidHex, checkAccessibility, hexToHsv, hsvToHex } from '../utils/colorUtils';
 import './RightSidebar.css';
 
 interface RightSidebarProps {
@@ -23,6 +23,21 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
     fg: palette[0]?.hex || '#000000',
     bg: '#FFFFFF'
   });
+
+  // HSV state for smooth color picker
+  const [hsv, setHsv] = useState(() => hexToHsv(newColorHex));
+
+  // Update HSV when newColorHex changes externally
+  useEffect(() => {
+    setHsv(hexToHsv(newColorHex));
+  }, [newColorHex]);
+
+  // Update hex when HSV changes
+  const updateColorFromHsv = (newHsv: { h: number; s: number; v: number }) => {
+    setHsv(newHsv);
+    const newHex = hsvToHex(newHsv.h, newHsv.s, newHsv.v);
+    setNewColorHex(newHex);
+  };
 
   // Common background colors for accessibility testing
   const commonBackgrounds = [
@@ -65,44 +80,126 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
         </div>
 
         <div className="color-input-section">
-          <div className="color-picker-group">
-            <input
-              type="color"
-              value={newColorHex}
-              onChange={(e) => setNewColorHex(e.target.value.toUpperCase())}
-              className="console-color-picker"
+          {/* Color Preview */}
+          <div className="color-preview">
+            <div
+              className="color-preview-swatch"
+              style={{ backgroundColor: newColorHex }}
+              title={newColorHex}
             />
             <input
               type="text"
               value={newColorHex}
-              onChange={(e) => setNewColorHex(e.target.value.toUpperCase())}
+              onChange={(e) => {
+                const upperCase = e.target.value.toUpperCase();
+                setNewColorHex(upperCase);
+              }}
               className="console-input hex-input"
               placeholder="#002868"
               pattern="^#[0-9A-Fa-f]{6}$"
             />
           </div>
 
-          <div className="action-buttons">
-            <button
-              onClick={onAddColor}
-              className="console-btn success"
-              disabled={!isValidHex(newColorHex)}
-            >
-              ➕ Add Color
-            </button>
-            <button
-              onClick={onAddRandomColor}
-              className="console-btn"
-            >
-              🎲 Random
-            </button>
-            <button
-              onClick={onOpenAdvancedPicker}
-              className="console-btn"
-            >
-              🎨 Advanced
-            </button>
+          {/* Enhanced Color Sliders */}
+          <div className="color-sliders">
+            {/* Hue Slider */}
+            <div className="slider-group">
+              <label className="slider-label">Hue</label>
+              <div className="slider-container">
+                <input
+                  type="range"
+                  min="0"
+                  max="360"
+                  value={hsv.h}
+                  onChange={(e) => updateColorFromHsv({ ...hsv, h: parseInt(e.target.value) })}
+                  className="color-slider hue-slider"
+                  style={{
+                    background: 'linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000)'
+                  }}
+                />
+                <span className="slider-value">{Math.round(hsv.h)}°</span>
+              </div>
+            </div>
+
+            {/* Saturation Slider */}
+            <div className="slider-group">
+              <label className="slider-label">Saturation</label>
+              <div className="slider-container">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={hsv.s}
+                  onChange={(e) => updateColorFromHsv({ ...hsv, s: parseInt(e.target.value) })}
+                  className="color-slider saturation-slider"
+                  style={{
+                    background: `linear-gradient(to right,
+                      ${hsvToHex(hsv.h, 0, hsv.v)},
+                      ${hsvToHex(hsv.h, 100, hsv.v)})`
+                  }}
+                />
+                <span className="slider-value">{Math.round(hsv.s)}%</span>
+              </div>
+            </div>
+
+            {/* Lightness/Value Slider */}
+            <div className="slider-group">
+              <label className="slider-label">Brightness</label>
+              <div className="slider-container">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={hsv.v}
+                  onChange={(e) => updateColorFromHsv({ ...hsv, v: parseInt(e.target.value) })}
+                  className="color-slider brightness-slider"
+                  style={{
+                    background: `linear-gradient(to right,
+                      ${hsvToHex(hsv.h, hsv.s, 0)},
+                      ${hsvToHex(hsv.h, hsv.s, 100)})`
+                  }}
+                />
+                <span className="slider-value">{Math.round(hsv.v)}%</span>
+              </div>
+            </div>
           </div>
+
+          {/* Fallback color picker for precision */}
+          <div className="precision-picker">
+            <label className="slider-label">Precision Picker</label>
+            <input
+              type="color"
+              defaultValue={newColorHex}
+              key={newColorHex}
+              onChange={(e) => {
+                const upperCase = e.target.value.toUpperCase();
+                setNewColorHex(upperCase);
+              }}
+              className="console-color-picker-small"
+            />
+          </div>
+        </div>
+
+        <div className="action-buttons">
+          <button
+            onClick={onAddColor}
+            className="console-btn success"
+            disabled={!isValidHex(newColorHex)}
+          >
+            ➕ Add Color
+          </button>
+          <button
+            onClick={onAddRandomColor}
+            className="console-btn"
+          >
+            🎲 Random
+          </button>
+          <button
+            onClick={onOpenAdvancedPicker}
+            className="console-btn"
+          >
+            🎨 Advanced
+          </button>
         </div>
       </div>
 
